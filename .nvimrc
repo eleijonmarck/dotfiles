@@ -42,4 +42,3 @@ set nobackup
 set ignorecase
 set smartcase
 set noshowmode
-set laststatus=2
