@@ -11,9 +11,11 @@ Plugin 'gmarik/Vundle.vim'
 " Plugin bundles
 Plugin 'fatih/vim-go'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
 
 " Language bundles
+Plugin 'tpope/vim-markdown'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'itchyny/lightline.vim'
 
 " Color scheme
 Plugin 'nanotech/jellybeans.vim'
@@ -39,4 +41,5 @@ set noswapfile
 set nobackup
 set ignorecase
 set smartcase
-set showmode
+set noshowmode
+set laststatus=2
