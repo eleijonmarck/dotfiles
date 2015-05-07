@@ -6,3 +6,15 @@ curl git zsh vim
 
 ### within vim we 
 vundle
+
+
+42
+├── common
+│   ├── tmux
+│   │   └── default.sh
+│   └── .vimrc
+├── osx
+│   └── .tmux.conf
+└── ubuntu
+    ├── .tmux.conf
+    └── vim_install.sh
