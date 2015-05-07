@@ -42,3 +42,8 @@ set nobackup
 set ignorecase
 set smartcase
 set noshowmode
+set laststatus=2
+
+" Hide the mouse pointer while typing
+set mouse=a
+set mousehide
