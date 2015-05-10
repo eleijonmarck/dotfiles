@@ -27,8 +27,6 @@ call vundle#end()
 
 filetype plugin indent on
 
-" color jellybeans
-
 set hidden
 syntax on
 set encoding=utf-8 termencoding=utf-8
@@ -36,14 +34,18 @@ set tabstop=2
 set nowrap
 set number
 set expandtab
+set shiftwidth=2
 set nowritebackup
 set noswapfile
 set nobackup
 set ignorecase
 set smartcase
 set noshowmode
+set splitright
 set laststatus=2
+
 
 " Hide the mouse pointer while typing
 set mouse=a
 set mousehide
+colorscheme 256-grayvim
