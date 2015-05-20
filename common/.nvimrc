@@ -31,6 +31,7 @@ set hidden
 syntax on
 set encoding=utf-8 termencoding=utf-8
 set tabstop=2
+set backspace=indent,eol,start
 set nowrap
 set number
 set expandtab
@@ -38,6 +39,7 @@ set shiftwidth=2
 set nowritebackup
 set noswapfile
 set nobackup
+set clipboard=unnamed,unnamedplus
 set ignorecase
 set smartcase
 set noshowmode
@@ -49,3 +51,9 @@ set laststatus=2
 set mouse=a
 set mousehide
 colorscheme 256-grayvim
+
+" Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","
+" easy esc
+inoremap jj <ESC>
