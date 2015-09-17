@@ -1,28 +1,27 @@
-set nocompatible
-filetype off
+call plug#begin('~/.vim/plugged')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
-" Plugin dependencies
-
+Plug 'Shougo/neocomplete.vim'
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Code to execute when the plugin is loaded on demand
+Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' }
+" autocmd! User YouCompleteMe call youcompleteme#Enable()
 " Plugin bundles
-Plugin 'fatih/vim-go'
-Plugin 'kien/ctrlp.vim'
+Plug 'fatih/vim-go'
+Plug 'kien/ctrlp.vim'
 
 " Language bundles
-Plugin 'tpope/vim-markdown'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'itchyny/lightline.vim'
+Plug 'tpope/vim-markdown'
+Plug 'vim-ruby/vim-ruby'
+Plug 'itchyny/lightline.vim'
 
 " Color scheme
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'flazz/vim-colorschemes'
+Plug 'nanotech/jellybeans.vim'
+Plug 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
-call vundle#end()
+" Add plugins to &runtimepath
+call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 filetype plugin indent on
