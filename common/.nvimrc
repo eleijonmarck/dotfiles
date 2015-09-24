@@ -3,8 +3,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'Shougo/neocomplete.vim'
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
 " Code to execute when the plugin is loaded on demand
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer --gocode-completer' } " python, c#, go
 " autocmd! User YouCompleteMe call youcompleteme#Enable()
 "
 " Plugin bundles

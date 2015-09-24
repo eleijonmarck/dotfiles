@@ -3,12 +3,6 @@
 # install zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-# install jupyter
-pip install --upgrade setuptools pip pycurl
-git clone https://github.com/jupyter/notebook.git
-cd notebook
-pip install -r requirements.txt -e .
-
 echo "Disable press-and-hold for keys in favor of key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
