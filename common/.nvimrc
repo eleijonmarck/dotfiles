@@ -4,15 +4,15 @@ Plug 'Shougo/neocomplete.vim'
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Code to execute when the plugin is loaded on demand
-Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' }
+Plug 'Valloric/YouCompleteMe'
 " autocmd! User YouCompleteMe call youcompleteme#Enable()
+"
 " Plugin bundles
-Plug 'fatih/vim-go'
 Plug 'kien/ctrlp.vim'
 
 " Language bundles
+Plug 'fatih/vim-go' 
 Plug 'tpope/vim-markdown'
-Plug 'vim-ruby/vim-ruby'
 Plug 'itchyny/lightline.vim'
 
 " Color scheme
