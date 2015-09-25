@@ -7,9 +7,16 @@ fi
 
 echo "Installing homebrew packages..."
 
+# update
+brew update
+brew doctor
+
 # cli tools
 brew install tree
 brew install wget
+
+# database
+brew install postgresql
 
 # development tools
 brew install git
