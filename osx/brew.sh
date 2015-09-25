@@ -44,5 +44,7 @@ brew install --HEAD --64bit julia
 brew tap neovim/neovim
 brew install --HEAD neovim
 
+# install fun
+brew install cmatrix
 
 exit 0
