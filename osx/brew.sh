@@ -35,6 +35,7 @@ brew tap homebrew/science
 brew install gcc
 brew install Caskroom/cask/xquartz
 brew install r
+brew install Caskroom/cask/rstudio
 
 # install Julia
 brew tap staticfloat/julia
