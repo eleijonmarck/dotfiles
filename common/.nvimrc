@@ -25,6 +25,14 @@ Plug 'flazz/vim-colorschemes'
 call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Use different colorschemes dependant on filetype
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufEnter * colorscheme default
+autocmd BufEnter *.php colorscheme Tomorrow-Night
+autocmd BufEnter *.py colorscheme Tomorrow
+autocmd BufEnter *.html colorscheme 256-jungle
+
+
 filetype plugin indent on
 
 set hidden
