@@ -4,20 +4,13 @@ Plug 'Shougo/neocomplete.vim'
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-" Code to execute when the plugin is loaded on demand
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --omnisharp-completer --gocode-completer' } " python, c#, go
-" autocmd! User YouCompleteMe call youcompleteme#Enable()
-"
 " Plugin bundles
 Plug 'kien/ctrlp.vim'
 
 " Language bundles
-Plug 'fatih/vim-go' 
 Plug 'tpope/vim-markdown'
-Plug 'itchyny/lightline.vim'
 
 " Color scheme
-Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
@@ -27,9 +20,8 @@ call plug#end()
 
 " Use different colorschemes dependant on filetype
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufEnter * colorscheme default
+autocmd BufEnter * colorscheme 256-grayvim
 autocmd BufEnter *.php colorscheme Tomorrow-Night
-autocmd BufEnter *.py colorscheme Tomorrow
 autocmd BufEnter *.html colorscheme 256-jungle
 
 
@@ -58,7 +50,6 @@ set laststatus=2
 " Hide the mouse pointer while typing
 set mouse=a
 set mousehide
-colorscheme 256-grayvim
 
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
