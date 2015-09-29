@@ -22,6 +22,7 @@ brew install macvim --override-system-vim
 brew install reattach-to-user-namespace
 brew install tmux
 brew install zsh
+chsh -s /bin/zsh
 brew install highlight
 brew install markdown
 
