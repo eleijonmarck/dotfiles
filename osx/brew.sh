@@ -14,10 +14,6 @@ brew doctor
 # cli tools
 brew install tree
 brew install wget
-
-# database
-brew install postgresql
-
 # development tools
 brew install git
 brew install hub
@@ -27,8 +23,16 @@ brew install tmux
 brew install zsh
 brew install highlight
 brew install markdown
-# for use with jupyter
 brew install node
+
+
+# android, mono
+brew install android-sdk
+brew install android-ndk
+brew install mono
+
+# database
+brew install postgresql
 
 # development server setup
 brew install nginx
