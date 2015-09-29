@@ -16,6 +16,7 @@ pip install virtualenv
 pip install matplotlib
 
 # web
+pip install grip # markdown checkout
 pip install requests
 pip install lxml
 
@@ -26,8 +27,5 @@ pip install nose
 pip install "ipython[all]"
 pip install nose
 pip install pygments
-
-# installing jupyter
-pip install --upgrade setuptools pip pycurl
 
 exit 0
