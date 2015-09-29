@@ -14,6 +14,7 @@ brew doctor
 # cli tools
 brew install tree
 brew install wget
+
 # development tools
 brew install git
 brew install hub
@@ -23,8 +24,10 @@ brew install tmux
 brew install zsh
 brew install highlight
 brew install markdown
-brew install node
 
+# frontend tools
+brew install node
+npm install gulp
 
 # android, mono
 brew install android-sdk
