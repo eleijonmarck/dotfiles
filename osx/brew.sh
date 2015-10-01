@@ -14,11 +14,14 @@ brew doctor
 # cli tools
 brew install tree
 brew install wget
+brew install iTerm2
+cd ~/Downloads  
+wget https://raw.github.com/altercation/solarized/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
 
 # development tools
 brew install git
 brew install hub
-brew install macvim --override-system-vim
+brew install vim --override-system-vim --with-cscope --with-lua
 brew install reattach-to-user-namespace
 brew install tmux
 brew install zsh
