@@ -13,12 +13,12 @@ Learn to love Vim and Vim might bite you in the ass. If you are a first timer tr
 
 ## Install OSX
 
-1. `install homebrew; ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-1. `install git via; brew install git
-1. `git clone https://github.com/eleijonmarck/dotfiles.git
+1. install homebrew; `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+1. install git via; `brew install git`
+1. `git clone https://github.com/eleijonmarck/dotfiles.git`
 1. `cd ~/dotfiles`
 1. `sh brew.sh`
-1. `sh install.sh
+1. `sh install.sh`
 
 ## ZSH Plugins
 By default, the `.zshrc` file will source any file within `dotfiles/common`
