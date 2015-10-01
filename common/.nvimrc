@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
-" 
-Plug 'Shougo/neocomplete.vim'
+" Plug 'Shougo/neocomplete.vim'
 " On-demand loading
 Plug 'scrooloose/nerdtree'
 
