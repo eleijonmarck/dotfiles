@@ -1,7 +1,7 @@
-# Dotfiles
+# dotfiles
 
 Welcome to the wonderful world of me and my terminal setup. This is a collection of vim, and zsh configurations.
-Learn to love Vim and Vim might bite you in the ass. If you are a first timer try to use some plugins and commands a time in the .nvimrc
+Learn to love Vim, because it's worth the effort.
 
 ## Contents
 
@@ -10,6 +10,16 @@ Learn to love Vim and Vim might bite you in the ass. If you are a first timer tr
 + git configuration
 + osx configuration
 + Homebrew files (brew.sh)
+
+## ZSH Plugins
+By default, the `.zshrc` file will source any file within `dotfiles/common`
+
+## Vim Plugins
+If you are a first timer try to use some plugins and commands each new week or so.
+Vim plugins are managed with [vim-plug](https://github.com/junegunn/vim-plug). 
+To install, run `vim +PlugInstall`, or in vim `:PluginInstall`.
+
+Also map the Capslock-key to Esc!!!
 
 ## Install OSX
 
@@ -20,11 +30,6 @@ Learn to love Vim and Vim might bite you in the ass. If you are a first timer tr
 1. `sh brew.sh`
 1. `sh install.sh`
 
-## ZSH Plugins
-By default, the `.zshrc` file will source any file within `dotfiles/common`
-
-## Vim Plugins
-Vim plugins are managed with [vim-plug](https://github.com/junegunn/vim-plug). To install, run `vim +PlugInstall`, or in vim `:PluginInstall`.
 
 ---
 
