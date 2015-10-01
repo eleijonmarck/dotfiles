@@ -3,7 +3,7 @@ call plug#begin('~/.vim/plugged')
 " 
 Plug 'Shougo/neocomplete.vim'
 " On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 
 " Plugin bundles
 Plug 'tpope/vim-fugitive' " git addon
