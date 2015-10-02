@@ -19,6 +19,7 @@ pip install matplotlib
 pip install grip # markdown checkout
 pip install requests
 pip install lxml
+pip install flask
 
 # test
 pip install nose
