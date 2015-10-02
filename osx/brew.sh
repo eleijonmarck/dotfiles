@@ -21,7 +21,7 @@ wget https://raw.github.com/altercation/solarized/master/iterm2-colors-solarized
 # development tools
 brew install git
 brew install hub
-brew install vim --override-system-vim --with-cscope --with-lua
+brew install vim --with-lua
 brew install reattach-to-user-namespace
 brew install tmux
 brew install zsh
