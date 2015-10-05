@@ -70,3 +70,6 @@ inoremap jj <ESC>
 
 " Open up NerdTree with Ctrl + N
 map <C-n> :NERDTreeToggle<CR>
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
