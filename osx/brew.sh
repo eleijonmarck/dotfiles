@@ -10,11 +10,14 @@ echo "Installing homebrew packages..."
 # update
 brew update
 brew doctor
+brew install cask
 
 # cli tools
 brew install tree
 brew install wget
 brew install iTerm2
+# caps lock to esc
+brew cask install seil
 cd ~/Downloads  
 wget https://raw.github.com/altercation/solarized/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
 
