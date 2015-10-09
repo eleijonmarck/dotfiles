@@ -31,6 +31,7 @@ brew install zsh
 chsh -s /bin/zsh
 brew install highlight
 brew install markdown
+brew install go
 
 # frontend tools
 brew install node
