@@ -15,6 +15,8 @@ Plug 'bling/vim-airline' " a smooth status/tabline for vim
 Plug 'mattn/emmet-vim' " HTML
 Plug 'godlygeek/tabular' " table arrangment
 Plug 'tpope/vim-markdown' " markdown
+" Go - code
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
 " Color scheme
 Plug 'flazz/vim-colorschemes'
