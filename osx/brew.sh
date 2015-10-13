@@ -14,13 +14,10 @@ brew install cask
 
 # cli tools
 brew install tree
-brew install wget
 brew install iTerm2
 brew install the_silver_searcher
 # caps lock to esc
 brew cask install seil
-cd ~/Downloads  
-wget https://raw.github.com/altercation/solarized/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
 
 # development tools
 brew install git
