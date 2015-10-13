@@ -16,6 +16,7 @@ brew install cask
 brew install tree
 brew install wget
 brew install iTerm2
+brew install the_silver_searcher
 # caps lock to esc
 brew cask install seil
 cd ~/Downloads  

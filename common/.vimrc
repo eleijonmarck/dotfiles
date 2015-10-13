@@ -1,15 +1,13 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'Shougo/neocomplete.vim'
-" On-demand loading
-Plug 'scrooloose/nerdtree'
 
 " Plugin bundles
-Plug 'tpope/vim-fugitive' " git addon
+Plug 'tpope/vim-fugitive' " git addon, Gadd, Gcommit, Gdiff
 Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
-Plug 'scrooloose/syntastic' " syntax highlighting
-Plug 'kien/ctrlp.vim' " buffer search
+Plug 'benekastah/neomake' " syntax checking
+Plug 'kien/ctrlp.vim' " fuzzysearch of filenames
 Plug 'bling/vim-airline' " a smooth status/tabline for vim
+Plug 'scrooloose/nerdtree'
 
 " Language bundles
 Plug 'mattn/emmet-vim' " HTML
@@ -20,7 +18,6 @@ Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' 
 
 " Color scheme
 Plug 'flazz/vim-colorschemes'
-Plug 'altercation/vim-colors-solarized' " good solarized background 
 
 " All of your Plugins must be added before the following line
 " Add plugins to &runtimepath
@@ -35,7 +32,6 @@ let g:neocomplete#enable_at_startup = 1
 " good colorschemes
 " jellybeans
 autocmd BufEnter * colorscheme 256-grayvim
-autocmd BufEnter *.html colorscheme 256-jungle
 
 " GENERAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,6 +66,12 @@ let mapleader = ","
 " easy esc
 inoremap jj <ESC>
 
+" Neomake syntax checking
+autocmd! BufWritePost * Neomake
+" NerdTree
+" Open up NerdTree in directory if nothing is specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Open up NerdTree with Ctrl + N
 map <C-n> :NERDTreeToggle<CR>
 
