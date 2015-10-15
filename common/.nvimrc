@@ -1,22 +1,31 @@
 call plug#begin('~/.vim/plugged')
 
-" On-demand loading
-Plug 'scrooloose/nerdtree'
-
 " Plugin bundles
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive' " git addon, Gadd, Gcommit, Gdiff
 Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
 Plug 'benekastah/neomake' " syntax checking
+
+" File status plugins
 Plug 'kien/ctrlp.vim' " fuzzysearch of filenames
 Plug 'bling/vim-airline' " a smooth status/tabline for vim
 Plug 'rking/ag.vim' " super fast text search within files, :Ag {options}
+
+"""""""""""""""""" 
 
 " Language bundles
 Plug 'mattn/emmet-vim' " HTML
 Plug 'godlygeek/tabular' " table arrangment
 Plug 'tpope/vim-markdown' " markdown
+Plug 'klen/python-mode.git' " Python code checker for PEP8
+
+"""""""""""""""""" 
+
 " Go - code
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+
+
+"""""""""""""""""" 
 
 " Color scheme
 Plug 'flazz/vim-colorschemes'
@@ -32,8 +41,8 @@ let g:neocomplete#enable_at_startup = 1
 " Use different colorschemes dependant on filetype
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " good colorschemes
-" jellybeans
-autocmd BufEnter * colorscheme 256-grayvim
+" jellybeans, wombat256mod
+autocmd BufEnter * colorscheme wombat256mod
 
 " GENERAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,6 +79,7 @@ inoremap jj <ESC>
 
 " Neomake syntax checking
 autocmd! BufWritePost * Neomake
+
 " NerdTree
 " Open up NerdTree in directory if nothing is specified
 autocmd StdinReadPre * let s:std_in=1
