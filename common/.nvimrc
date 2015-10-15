@@ -1,9 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugin bundles
-Plug 'scrooloose/nerdtree' { 'on' : 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive' " git addon, Gadd, Gcommit, Gdiff
 Plug 'tpope/vim-sensible' " a bunch of set commands that should be default
+Plug 'tpope/vim-markdown' " markdown
+Plug 'tpope/vim-dispatch' " test asynchroncly
+Plug 'tpope/vim-surround' " surronds the ',\" and {. :help surrond
 Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
 Plug 'benekastah/neomake' " syntax checking
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
@@ -18,17 +21,15 @@ Plug 'rking/ag.vim' " super fast text search within files, :Ag {options}
 " Language bundles
 Plug 'mattn/emmet-vim' " HTML
 Plug 'godlygeek/tabular' " table arrangment
-Plug 'tpope/vim-markdown' " markdown
 
 """""""""""""""""" 
 
 " Go - code
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-Plug 'fatih/vim-go', { 'for' : 'go' }
-
+Plug 'fatih/vim-go', { 'for': 'go' }
 
 " C#
-Plug 'OmniSharp/omnisharp-vim' { 'for' : 'cs' }
+Plug 'OmniSharp/omnisharp-vim'
 """""""""""""""""" 
 
 " Color scheme
