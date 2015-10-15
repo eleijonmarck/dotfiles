@@ -7,6 +7,7 @@ Plug 'tpope/vim-sensible' " a bunch of set commands that should be default
 Plug 'tpope/vim-markdown' " markdown
 Plug 'tpope/vim-dispatch' " test asynchroncly
 Plug 'tpope/vim-surround' " surronds the ',\" and {. :help surrond
+Plug 'tpope/vim-commentary' " comments with <gcc> , or <V-gc> for visual mode
 Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
 Plug 'benekastah/neomake' " syntax checking
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
