@@ -1,11 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
 " Plugin bundles
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree' { 'on' : 'NERDTreeToggle' }
 Plug 'tpope/vim-fugitive' " git addon, Gadd, Gcommit, Gdiff
 Plug 'tpope/vim-sensible' " a bunch of set commands that should be default
 Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
 Plug 'benekastah/neomake' " syntax checking
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " File status plugins
 Plug 'kien/ctrlp.vim' " fuzzysearch of filenames
@@ -18,12 +19,12 @@ Plug 'rking/ag.vim' " super fast text search within files, :Ag {options}
 Plug 'mattn/emmet-vim' " HTML
 Plug 'godlygeek/tabular' " table arrangment
 Plug 'tpope/vim-markdown' " markdown
-Plug 'klen/python-mode.git' " Python code checker for PEP8
 
 """""""""""""""""" 
 
 " Go - code
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'fatih/vim-go', { 'for' : 'go' }
 
 
 """""""""""""""""" 
