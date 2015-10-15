@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 " Plugin bundles
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive' " git addon, Gadd, Gcommit, Gdiff
+Plug 'tpope/vim-sensible' " a bunch of set commands that should be default
 Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
 Plug 'benekastah/neomake' " syntax checking
 
