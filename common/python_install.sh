@@ -25,8 +25,9 @@ pip install flask
 pip install nose
 
 # install ipython
-pip install "ipython[all]"
-pip install nose
 pip install pygments
+pip install "ipython[all]"
 
+pip install scipy
+pip install pandas
 exit 0

@@ -16,6 +16,7 @@ brew install cask
 brew install tree
 brew install iTerm2
 brew install the_silver_searcher
+
 # caps lock to esc
 brew cask install seil
 
@@ -30,6 +31,9 @@ chsh -s /bin/zsh
 brew install highlight
 brew install markdown
 brew install go
+
+# quicklook smart tools
+brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
 
 # frontend tools
 brew install node
