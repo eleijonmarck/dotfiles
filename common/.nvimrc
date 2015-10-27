@@ -67,6 +67,7 @@ set encoding=utf-8 termencoding=utf-8
 set tabstop=2
 set backspace=indent,eol,start
 set nowrap
+set relativenumber 
 set number
 set expandtab
 set shiftwidth=2
