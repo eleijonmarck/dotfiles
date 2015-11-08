@@ -23,7 +23,6 @@ brew cask install seil
 # development tools
 brew install git
 brew install hub
-brew install vim --with-lua
 brew install reattach-to-user-namespace
 brew install tmux
 brew install zsh
@@ -37,7 +36,6 @@ brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch 
 
 # frontend tools
 brew install node
-npm install gulp
 
 # android, mono
 brew install android-sdk
