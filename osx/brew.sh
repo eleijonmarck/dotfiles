@@ -31,6 +31,11 @@ brew install highlight
 brew install markdown
 brew install go
 
+# docker installation
+brew cask install virtualbox
+brew install docker
+brew install Caskroom/cask/dockertoolbox
+
 # quicklook smart tools
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
 
