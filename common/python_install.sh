@@ -24,6 +24,9 @@ pip install flask
 # test
 pip install nose
 
+# machine-learning
+pip install https://storage.googleapis.com/tensorflow/mac/tensorflow-0.5.0-py2-none-any.whl
+
 # install ipython
 pip install pygments
 pip install "ipython[all]"
