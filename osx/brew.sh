@@ -31,6 +31,10 @@ brew install highlight
 brew install markdown
 brew install go
 
+# haskell
+brew install ghci cabal-install
+brew install haskell-stack
+
 # docker installation
 brew cask install virtualbox
 brew install docker
