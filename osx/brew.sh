@@ -19,6 +19,7 @@ brew install the_silver_searcher
 
 # caps lock to esc
 brew cask install seil
+brew cask install spectacle
 
 # development tools
 brew install git
