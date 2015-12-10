@@ -16,6 +16,7 @@ brew install cask
 brew install tree
 brew install iTerm2
 brew install the_silver_searcher
+brew install fzf
 
 # caps lock to esc
 brew cask install seil

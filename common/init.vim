@@ -21,9 +21,9 @@ Plug 'honza/vim-snippets' " snippet tool
 
 " File status plugins
 Plug 'scrooloose/nerdtree' " self explainatory
-Plug 'kien/ctrlp.vim' " fuzzysearch of filenames
 Plug 'bling/vim-airline' " a smooth status/tabline for vim
 Plug 'rking/ag.vim' " super fast text search within files, :Ag {options}
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " blazing fast file search using Ag, use: find * -type f | fzf > selected
 Plug 'christoomey/vim-tmux-navigator' " tmux, vim windows with <Ctrl-h,j,k,l>
 Plug 'lervag/vimtex' " tex
 
@@ -33,7 +33,6 @@ Plug 'lervag/vimtex' " tex
 " Language bundles
 Plug 'mattn/emmet-vim' " HTML
 Plug 'godlygeek/tabular' " table arrangment
-Plug 'OmniSharp/omnisharp-vim' " C#
 
 """""""""""""""""" 
 
