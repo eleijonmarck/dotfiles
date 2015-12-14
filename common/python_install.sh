@@ -12,6 +12,9 @@ pip install --upgrade pip
 # virtual env
 pip install virtualenv
 
+# command line
+pip install csvkit # data cleaner
+
 # matplotlib
 pip install matplotlib
 
