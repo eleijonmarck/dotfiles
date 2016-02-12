@@ -14,6 +14,7 @@ pip install virtualenv
 
 # command line
 pip install csvkit # data cleaner
+pip install tldr # man pages for unix commands
 
 # matplotlib
 pip install matplotlib
