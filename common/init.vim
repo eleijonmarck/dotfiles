@@ -26,6 +26,8 @@ Plug 'bling/vim-airline' " a smooth status/tabline for vim
 Plug 'rking/ag.vim' " super fast text search within files, :Ag {options}
 Plug 'christoomey/vim-tmux-navigator' " tmux, vim windows with <Ctrl-h,j,k,l>
 Plug 'lervag/vimtex' " tex
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " :FZF
+Plug 'junegunn/fzf.vim'
 
 
 """""""""""""""""" 
@@ -33,7 +35,6 @@ Plug 'lervag/vimtex' " tex
 " Language bundles
 Plug 'mattn/emmet-vim' " HTML
 Plug 'godlygeek/tabular' " table arrangment
-Plug 'OmniSharp/omnisharp-vim' " C#
 
 """""""""""""""""" 
 
@@ -157,3 +158,19 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 :nnoremap <C-w>j <C-w>j
 :nnoremap <C-w>k <C-w>k
 :nnoremap <C-w>l <C-w>l
+
+" FZF
+" This is the default extra key bindings
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+" - window (nvim only)
+let g:fzf_layout = { 'down': '~40%' }
+
+" Advanced customization using autoload functions
+autocmd VimEnter * command! Colors
+  \ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})

@@ -26,11 +26,10 @@ brew cask install spectacle
 brew install git
 brew install hub
 brew install reattach-to-user-namespace
-brew install tmux
 brew install zsh
-chsh -s /bin/zsh
 brew install highlight
 brew install markdown
+brew cask install macdown
 brew install go
 
 # haskell
@@ -59,7 +58,7 @@ brew install postgresql
 # development server setup
 brew install nginx
 
-# install Data Science stuff
+################## install Data Science stuff #########################
 # download python
 brew install python
 
