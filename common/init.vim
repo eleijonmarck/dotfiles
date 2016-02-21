@@ -1,4 +1,4 @@
-" plugin Setup
+ï»¿" plugin Setup
 call plug#begin('~/.vim/plugged')
 
 " Plugin tpope, making my life easier 
@@ -103,6 +103,10 @@ color wombat256
 
 " Plugin specific setup""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" FZF
+set rtp+=~/.fzf
+nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
+
 " For neocompletion to be able at start
 let g:neocomplete#enable_at_startup = 1
 
@@ -132,7 +136,7 @@ let mapleader = ","
 " easy esc
 :imap jj <ESC>
 :imap jk <Esc>
-:imap kj <Esc>ý¿¿¹°ƒ
+:imap kj <Esc>
 
 " Neomake syntax checking
 autocmd! BufWritePost * Neomake
