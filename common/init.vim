@@ -73,6 +73,7 @@ set nowritebackup noswapfile nobackup
 set clipboard=unnamed
 set ignorecase smartcase
 set splitright
+" always show the status line
 set laststatus=2
 
 " indents
@@ -100,7 +101,12 @@ set splitright    " spawn vertical splits to the right instead of left"
 "" Use different colorschemes dependant on filetype
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" good colorschemes
-color wombat256
+
+
+" Solarized theme
+set background=dark
+colorscheme solarized
+"colorscheme wombat256
 
 " Plugin specific setup""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -139,6 +145,13 @@ let mapleader = ","
 :imap jk <Esc>
 :imap kj <Esc>
 
+
+" Vim-ruby
+autocmd FileType ruby,eruby compiler ruby
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
 " Neomake syntax checking
 autocmd! BufWritePost * Neomake
 
@@ -158,19 +171,3 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 :nnoremap <C-w>j <C-w>j
 :nnoremap <C-w>k <C-w>k
 :nnoremap <C-w>l <C-w>l
-
-" FZF
-" This is the default extra key bindings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-" - window (nvim only)
-let g:fzf_layout = { 'down': '~40%' }
-
-" Advanced customization using autoload functions
-autocmd VimEnter * command! Colors
-  \ call fzf#vim#colors({'left': '15%', 'options': '--reverse --margin 30%,0'})
