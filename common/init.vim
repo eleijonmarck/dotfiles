@@ -48,6 +48,10 @@ Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'ahayman/vim-nodejs-complete', {'for': 'javascript'}
 Plug 'ternjs/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
 
+" Ruby
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-endwise'
+
 " Color scheme
 Plug 'flazz/vim-colorschemes'
 
@@ -112,7 +116,8 @@ colorscheme solarized
 
 " FZF
 set rtp+=~/.fzf
-nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
+" nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
+nnoremap <C-p> :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
 
 " For neocompletion to be able at start
 let g:neocomplete#enable_at_startup = 1
