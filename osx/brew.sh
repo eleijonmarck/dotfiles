@@ -20,6 +20,8 @@ brew install fzf
 
 # caps lock to esc
 brew cask install seil
+
+# panes for windows
 brew cask install spectacle
 
 # development tools
@@ -29,12 +31,19 @@ brew install reattach-to-user-namespace
 brew install zsh
 brew install highlight
 brew install markdown
-brew cask install macdown
 brew install go
+
+# install Neovim
+brew tap neovim/neovim
+brew install --HEAD neovim
 
 # haskell
 brew install ghci cabal-install
 brew install haskell-stack
+
+# scala
+brew install scala
+brew install sbt
 
 # docker installation
 brew cask install virtualbox
@@ -62,7 +71,7 @@ brew install nginx
 # download python
 brew install python
 
-# download R
+# install  R
 brew tap homebrew/science
 brew install gcc
 brew install Caskroom/cask/xquartz
@@ -72,10 +81,6 @@ brew install Caskroom/cask/rstudio
 # install Julia
 brew tap staticfloat/julia
 brew install --HEAD --64bit julia
-
-# install Neovim
-brew tap neovim/neovim
-brew install --HEAD neovim
 
 # install fun
 brew install cmatrix
