@@ -11,8 +11,8 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write -g KeyRepeat -int 1
 
 echo "Set a shorter Delay until key repeat"
-defaults write NSGlobalDomain InitialKeyRepeat -int 11
-defaults write -g InitialKeyRepeat -int 11
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write -g InitialKeyRepeat -int 15
 
 # echo "Finder: show all filename extensions"
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
