@@ -56,11 +56,6 @@ brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch 
 # frontend tools
 brew install node
 
-# android, mono
-brew install android-sdk
-brew install android-ndk
-brew install mono
-
 # database
 brew install postgresql
 
