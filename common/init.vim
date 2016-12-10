@@ -21,9 +21,7 @@ Plug 'honza/vim-snippets' " snippet tool
 
 " File status plugins
 Plug 'scrooloose/nerdtree' " self explainatory
-Plug 'kien/ctrlp.vim' " fuzzysearch of filenames
 Plug 'bling/vim-airline' " a smooth status/tabline for vim
-Plug 'rking/ag.vim' " super fast text search within files, :Ag {options}
 Plug 'christoomey/vim-tmux-navigator' " tmux, vim windows with <Ctrl-h,j,k,l>
 Plug 'lervag/vimtex' " tex
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " :FZF
@@ -42,15 +40,14 @@ Plug 'godlygeek/tabular' " table arrangment
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 
-" Javascript
-Plug 'moll/vim-node', {'for': 'javascript'}
-Plug 'othree/yajs.vim', {'for': 'javascript'}
-Plug 'ahayman/vim-nodejs-complete', {'for': 'javascript'}
-Plug 'ternjs/tern_for_vim', {'for': 'javascript', 'do': 'npm install'}
+" Scala
+Plug 'derekwyatt/vim-scala'
 
-" Ruby
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-endwise'
+" Javascript
+Plug 'othree/yajs.vim', {'for': 'javascript'} " syntax highlighting for ES6
+
+" Elixir
+Plug 'elixir-lang/vim-elixir'
 
 " Color scheme
 Plug 'flazz/vim-colorschemes'
@@ -96,9 +93,6 @@ set incsearch     " show search matches as you type
 " Hide the mouse pointer while typing
 set mouse=a
 
-" set folding enabled with za,zM,zR
-set foldmethod=indent
-
 set splitbelow    " spawn horizontal splits below instead of above"
 set splitright    " spawn vertical splits to the right instead of left"
 
@@ -106,14 +100,12 @@ set splitright    " spawn vertical splits to the right instead of left"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" good colorschemes
 
-
 " Solarized theme
 set background=dark
-colorscheme solarized
-"colorscheme wombat256
+colorscheme wombat256
 
 " Plugin specific setup""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+"
 " FZF
 set rtp+=~/.fzf
 " nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
@@ -149,13 +141,6 @@ let mapleader = ","
 :imap jj <ESC>
 :imap jk <Esc>
 :imap kj <Esc>
-
-
-" Vim-ruby
-autocmd FileType ruby,eruby compiler ruby
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Neomake syntax checking
 autocmd! BufWritePost * Neomake
