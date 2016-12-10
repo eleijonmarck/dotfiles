@@ -109,7 +109,7 @@ colorscheme wombat256
 " FZF
 set rtp+=~/.fzf
 " nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
-nnoremap <C-p> :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
+nnoremap <C-p> :FZF!<CR>
 
 " For neocompletion to be able at start
 let g:neocomplete#enable_at_startup = 1
