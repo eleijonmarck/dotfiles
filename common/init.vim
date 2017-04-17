@@ -15,7 +15,6 @@ Plug 'benekastah/neomake' " syntax checking
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'easymotion/vim-easymotion' "navgiation in file, via ,+,
 Plug 'honza/vim-snippets' " snippet tool
-" Plug 'ervandew/supertab' " so all completion happens with tab
 
 """""""""""""""""""""""""""""""""
 
@@ -46,9 +45,7 @@ Plug 'derekwyatt/vim-scala'
 " Javascript
 Plug 'othree/yajs.vim', {'for': 'javascript'} " syntax highlighting for ES6
 
-" Elixir
-Plug 'elixir-lang/vim-elixir'
-
+Plug '
 " Color scheme
 Plug 'flazz/vim-colorschemes'
 
@@ -68,12 +65,14 @@ set backspace=indent,eol,start
 set relativenumber number
 set expandtab
 set shiftwidth=4 tabstop=4 textwidth=74
-
-" no fucking backupfiles
-set nowritebackup noswapfile nobackup
 set clipboard=unnamed
+
+" no backupfiles
+set nowritebackup noswapfile nobackup
+
+" case sensitivity
 set ignorecase smartcase
-set splitright
+
 " always show the status line
 set laststatus=2
 
@@ -93,6 +92,7 @@ set incsearch     " show search matches as you type
 " Hide the mouse pointer while typing
 set mouse=a
 
+" splits
 set splitbelow    " spawn horizontal splits below instead of above"
 set splitright    " spawn vertical splits to the right instead of left"
 
@@ -106,17 +106,16 @@ colorscheme wombat256
 
 " Plugin specific setup""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
+" some plugins use python 
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 " FZF
 set rtp+=~/.fzf
-" nnoremap <leader>t :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
-nnoremap <C-p> :FZF!<CR>
+"nnoremap <C-p> :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
+nnoremap <C-p> :FZF! <CR>
 
 " For neocompletion to be able at start
 let g:neocomplete#enable_at_startup = 1
-
-" Open up NerdTree in directory if nothing is specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "" Powerline fonts and enablers
 let g:airline_powerline_fonts = 1
@@ -141,6 +140,9 @@ let mapleader = ","
 :imap jj <ESC>
 :imap jk <Esc>
 :imap kj <Esc>
+
+" <leader>,y makes the python formatting acording to yapf
+autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
 
 " Neomake syntax checking
 autocmd! BufWritePost * Neomake
