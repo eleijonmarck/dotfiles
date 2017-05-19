@@ -1,83 +1,119 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-if test ! $(which brew); then
-    echo "Installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+# Install command-line tools using Homebrew.
 
-echo "Installing homebrew packages..."
+# Ask for the administrator password upfront.
+sudo -v
 
-# update
-brew update
-brew doctor
-brew install cask
+# Keep-alive: update existing `sudo` time stamp until the script has finished.
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# cli tools
-brew install tree
-brew install iTerm2
-brew install the_silver_searcher
-brew install fzf
+	# Check for Homebrew,
+	# Install if we don't have it
+	if test !$(which brew); then
+		echo "Installing homebrew..."
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
 
-# caps lock to esc
-brew cask install seil
+	# Make sure we’re using the latest Homebrew.
+	brew update
 
-# panes for windows
-brew cask install spectacle
+	# Upgrade any already-installed formulae.
+	brew upgrade --all
 
-# development tools
-brew install git
-brew install hub
-brew install reattach-to-user-namespace
-brew install zsh
-brew install highlight
-brew install markdown
-brew install go
+	# Install GNU core utilities (those that come with OS X are outdated).
+	# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+	brew install coreutils
+	sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
-# install Neovim
-brew tap neovim/neovim
-brew install --HEAD neovim
 
-# haskell
-brew install ghci cabal-install
-brew install haskell-stack
+	# Install some other useful utilities like `sponge`.
+	brew install moreutils
+	# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
+	brew install findutils
+	# Install GNU `sed`, overwriting the built-in `sed`.
+	brew install gnu-sed --with-default-names
+	# Install Bash 4.
+	brew install bash
+	brew tap homebrew/versions
+	brew install bash-completion2
+	# We installed the new shell, now we have to activate it
+	echo "Adding the newly installed shell to the list of allowed shells"
+	# Prompts for password
+	sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+	# Change to the new shell, prompts for password
+	chsh -s /usr/local/bin/bash
 
-# scala
-brew install scala
-brew install sbt
+	# Install more recent versions of some OS X tools.
+	brew install zsh
+	brew install vim --override-system-vi
+	brew install homebrew/dupes/grep
+	brew install homebrew/dupes/openssh
+	brew install homebrew/dupes/screen
+	# cli tools
+	brew install tree
+	brew install the_silver_searcher
+	brew install fzf
+	# install Neovim
+	brew tap neovim/neovim
+	brew install --HEAD neovim
 
-# docker installation
-brew cask install virtualbox
-brew install docker
-brew install Caskroom/cask/dockertoolbox
+	# download python
+	# Install Python
+	brew install python
+	brew install python3
 
-# quicklook smart tools
-brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
+	# Install other useful binaries.
+	brew install git
+	brew install git-lfs
+	brew install git-flow
+	brew install git-extras
+	brew install ssh-copy-id
 
-# frontend tools
-brew install node
+	brew install libxml2
+	brew install libxslt
+	brew link libxml2 --force
+	brew link libxslt --force
 
-# database
-brew install postgresql
+	# frontend tools
+	brew install node
 
-# development server setup
-brew install nginx
+	# database
+	brew install postgresql
 
-################## install Data Science stuff #########################
-# download python
-brew install python
+	# Install Cask
+	echo "Installing Applications"
+	brew install caskroom/cask/brew-cask
 
-# install  R
-brew tap homebrew/science
-brew install gcc
-brew install Caskroom/cask/xquartz
-brew install r
-brew install Caskroom/cask/rstudio
+	brew cask install --appdir="/Applications" vagrant
+	brew cask install --appdir="/Applications" slack
+	brew cask install --appdir="/Applications" virtualbox
+	brew cask install --appdir="/Applications" visual-studio-code
+	brew cask install --appdir="/Applications" iterm2
+	brew cask install --appdir="/Applications" 1password
+	brew cask install --appdir="/Applications" google-chrome
+	brew cask install --appdir="/Applications" evernote
+	brew cask install --appdir="/Applications" spectacle #panes for mac
 
-# install Julia
-brew tap staticfloat/julia
-brew install --HEAD --64bit julia
+	# Install developer friendly quick look plugins; see
+	# https://github.com/sindresorhus/quick-look-plugins
+	brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json
+	qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook
+	suspicious-package
 
-# install fun
-brew install cmatrix
+	# install fun
+	brew install ponysay
+	brew install cmatrix
 
-exit 0
+	brew cleanup
+
+	sudo pip install gsutil
+	sudo pip install ansible
+
+	# Restart shell
+	exec -l $SHELL
+	while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done2>/dev/null &
+
+		echo "Installing vagrant plugins"
+		vagrant plugin install vagrant-triggers
+		vagrant plugin install vagrant-multi-hostsupdater
