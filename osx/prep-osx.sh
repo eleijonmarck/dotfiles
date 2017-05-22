@@ -6,6 +6,9 @@
 # Ask for the administrator password upfront
 sudo -v
 
+# Sets the system language to english
+languagesetup -langspec English
+
 echo "Installing Xcode Command Line Tools."
 # Install Xcode command line tools
 xcode-select --install
