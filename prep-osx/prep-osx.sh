@@ -135,10 +135,10 @@ defaults write NSGlobalDomain com.apple.springing.enabled -bool true
 defaults write NSGlobalDomain com.apple.springing.delay -float .5
 
 # Avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
-defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
-defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+# defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+# defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+# defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 # Use list view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
@@ -207,9 +207,6 @@ defaults write com.apple.dock autohide-time-modifier -int 0
 echo "Move the dock to the left"
 defaults write com.apple.dock orientation left
 
-echo "Disabling press-and-hold for special keys in favor of key repeat"
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
 echo "Kill affected applications"
 for app in Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 
@@ -270,6 +267,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install the_silver_searcher
     brew install fzf
     # install Neovim
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     brew tap neovim/neovim
     brew install --HEAD neovim
 
