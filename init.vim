@@ -106,9 +106,6 @@ colorscheme wombat256
 
 " Plugin specific setup""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
-" some plugins use python 
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
 " FZF
 set rtp+=~/.fzf
 "nnoremap <C-p> :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
@@ -140,6 +137,13 @@ let mapleader = ","
 :imap jj <ESC>
 :imap jk <Esc>
 :imap kj <Esc>
+
+" Tab between buffers
+noremap <tab> <c-w>w
+noremap <S-tab> <c-w>W
+
+" Switch between last two buffers
+nnoremap <leader><leader> <C-^>
 
 " <leader>,y makes the python formatting acording to yapf
 autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
