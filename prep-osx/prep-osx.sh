@@ -271,6 +271,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     brew tap neovim/neovim
     brew install --HEAD neovim
+    brew install ctags
 
     # download python
     # Install Python

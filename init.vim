@@ -14,7 +14,7 @@ Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
 Plug 'benekastah/neomake' " syntax checking
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'easymotion/vim-easymotion' "navgiation in file, via ,+,
-Plug 'honza/vim-snippets' " snippet tool
+Plug 'pearofducks/ansible-vim' " ansible syntax
 
 """""""""""""""""""""""""""""""""
 
@@ -22,7 +22,6 @@ Plug 'honza/vim-snippets' " snippet tool
 Plug 'scrooloose/nerdtree' " self explainatory
 Plug 'bling/vim-airline' " a smooth status/tabline for vim
 Plug 'christoomey/vim-tmux-navigator' " tmux, vim windows with <Ctrl-h,j,k,l>
-Plug 'lervag/vimtex' " tex
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " :FZF
 Plug 'junegunn/fzf.vim'
 
@@ -30,8 +29,6 @@ Plug 'junegunn/fzf.vim'
 """""""""""""""""" 
 
 " Language bundles
-Plug 'mattn/emmet-vim' " HTML
-Plug 'godlygeek/tabular' " table arrangment
 
 """""""""""""""""" 
 
@@ -39,13 +36,12 @@ Plug 'godlygeek/tabular' " table arrangment
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 
-" Scala
-Plug 'derekwyatt/vim-scala'
+" HTML
+Plug 'mattn/emmet-vim'
 
 " Javascript
 Plug 'othree/yajs.vim', {'for': 'javascript'} " syntax highlighting for ES6
 
-Plug '
 " Color scheme
 Plug 'flazz/vim-colorschemes'
 
@@ -53,7 +49,6 @@ Plug 'flazz/vim-colorschemes'
 " Add plugins to &runtimepath
 call plug#end()
 
-" Settings ----------------------------------------------------------------------------------
 
 " GENERAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -93,8 +88,7 @@ set incsearch     " show search matches as you type
 set mouse=a
 
 " splits
-set splitbelow    " spawn horizontal splits below instead of above"
-set splitright    " spawn vertical splits to the right instead of left"
+set splitbelow splitright    " spawn vertical splits to the right instead of left"
 
 "" Use different colorschemes dependant on filetype
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -119,12 +113,11 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled=1
 "
 " Text and latex specific settings
-au FileType text,tex,markdown setlocal wrap linebreak nolist spell spelllang=en_us
+au FileType text,markdown setlocal wrap linebreak nolist spell spelllang=en_us
 
 " YouCompleteMe
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_filetype_blacklist = {
-      \ 'tex' : 1,
       \ 'markdown' : 1,
       \ 'text' : 1
       \}
