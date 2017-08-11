@@ -48,6 +48,7 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
     '{"enabled" = 1;"name" = "DIRECTORIES";}' \
     '{"enabled" = 1;"name" = "PDF";}' \
     '{"enabled" = 1;"name" = "FONTS";}' \
+    '{"enabled" = 1;"name" = "CALCULATOR";}' \
     '{"enabled" = 0;"name" = "DOCUMENTS";}' \
     '{"enabled" = 0;"name" = "MESSAGES";}' \
     '{"enabled" = 0;"name" = "CONTACT";}' \
@@ -89,6 +90,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write -g InitialKeyRepeat -int 12 # normal minimum is 15 (225 ms)
 
 echo "Setting trackpad & mouse speed to a reasonable number"
 defaults write -g com.apple.trackpad.scaling 2
@@ -295,6 +297,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     # database
     brew install postgresql
+    brew install pgcli
 
     # Install Cask
     echo "Installing Applications"
@@ -323,6 +326,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     sudo pip install gsutil
     sudo pip install ansible
+    sudo pip install bpython
 
     ponysay "It worked"
     # Restart shell
