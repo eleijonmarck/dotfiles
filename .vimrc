@@ -11,18 +11,13 @@ Plug 'tpope/vim-repeat' " makes the . command repearable
 Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
 
 " Syntaxing and completion
-Plug 'benekastah/neomake' " syntax checking
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'easymotion/vim-easymotion' "navgiation in file, via ,+,
-Plug 'honza/vim-snippets' " snippet tool
 
 """""""""""""""""""""""""""""""""
 
 " File status plugins
 Plug 'scrooloose/nerdtree' " self explainatory
 Plug 'bling/vim-airline' " a smooth status/tabline for vim
-Plug 'christoomey/vim-tmux-navigator' " tmux, vim windows with <Ctrl-h,j,k,l>
-Plug 'lervag/vimtex' " tex
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " :FZF
 Plug 'junegunn/fzf.vim'
 
@@ -38,9 +33,6 @@ Plug 'godlygeek/tabular' " table arrangment
 " Go - code
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go', { 'for': 'go' }
-
-" Scala
-Plug 'derekwyatt/vim-scala'
 
 " Javascript
 Plug 'othree/yajs.vim', {'for': 'javascript'} " syntax highlighting for ES6
@@ -114,24 +106,10 @@ set rtp+=~/.fzf
 "nnoremap <C-p> :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
 nnoremap <C-p> :FZF! <CR>
 
-" For neocompletion to be able at start
-let g:neocomplete#enable_at_startup = 1
-
 "" Powerline fonts and enablers
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled=1
 "
-" Text and latex specific settings
-au FileType text,tex,markdown setlocal wrap linebreak nolist spell spelllang=en_us
-
-" YouCompleteMe
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_filetype_blacklist = {
-      \ 'tex' : 1,
-      \ 'markdown' : 1,
-      \ 'text' : 1
-      \}
-
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
@@ -144,22 +122,9 @@ let mapleader = ","
 " <leader>,y makes the python formatting acording to yapf
 autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
 
-" Neomake syntax checking
-autocmd! BufWritePost * Neomake
-
 " NerdTree
 " Open up NerdTree with Ctrl + N
 map <C-n> :NERDTreeToggle<CR>
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-"Better window navigation with ctrl-w-hjkl
-:tnoremap <C-w>h <C-\><C-n><C-w>h
-:tnoremap <C-w>j <C-\><C-n><C-w>j
-:tnoremap <C-w>k <C-\><C-n><C-w>k
-:tnoremap <C-w>l <C-\><C-n><C-w>l
-:nnoremap <C-w>h <C-w>h
-:nnoremap <C-w>j <C-w>j
-:nnoremap <C-w>k <C-w>k
-:nnoremap <C-w>l <C-w>l

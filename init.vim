@@ -12,7 +12,6 @@ Plug 'airblade/vim-gitgutter' " git gutter +/- signs to the left of the file
 
 " Syntaxing and completion
 Plug 'benekastah/neomake' " syntax checking
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'easymotion/vim-easymotion' "navgiation in file, via ,+,
 Plug 'pearofducks/ansible-vim' " ansible syntax
 
@@ -26,6 +25,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " :FZF
 Plug 'junegunn/fzf.vim'
 
 
+" Own personal vimwiki
+Plug 'vimwiki/vimwiki' " open it with ,ww . But be sure to sync it to github
 """""""""""""""""" 
 
 " Language bundles
@@ -59,7 +60,6 @@ set encoding=utf-8 termencoding=utf-8
 set backspace=indent,eol,start
 set relativenumber number
 set expandtab
-set shiftwidth=4 tabstop=4 textwidth=74
 set clipboard=unnamed
 
 " no backupfiles
@@ -90,6 +90,11 @@ set mouse=a
 " splits
 set splitbelow splitright    " spawn vertical splits to the right instead of left"
 
+" python specific
+let python_highlight_all=1
+" python PEP8 standard
+au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=79 expandtab autoindent fileformat=unix
+
 "" Use different colorschemes dependant on filetype
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" good colorschemes
@@ -102,7 +107,6 @@ colorscheme wombat256
 "
 " FZF
 set rtp+=~/.fzf
-"nnoremap <C-p> :call fzf#run({'sink': 'e', 'window': 'enew'})<CR>
 nnoremap <C-p> :FZF! <CR>
 
 " For neocompletion to be able at start
@@ -112,16 +116,6 @@ let g:neocomplete#enable_at_startup = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled=1
 "
-" Text and latex specific settings
-au FileType text,markdown setlocal wrap linebreak nolist spell spelllang=en_us
-
-" YouCompleteMe
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_filetype_blacklist = {
-      \ 'markdown' : 1,
-      \ 'text' : 1
-      \}
-
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
@@ -138,6 +132,9 @@ noremap <S-tab> <c-w>W
 " Switch between last two buffers
 nnoremap <leader><leader> <C-^>
 
+" To map <Esc> to exit terminal-mode:
+:tnoremap <Esc> <C-\><C-n>
+
 " <leader>,y makes the python formatting acording to yapf
 autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
 
@@ -150,13 +147,3 @@ map <C-n> :NERDTreeToggle<CR>
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-"Better window navigation with ctrl-w-hjkl
-:tnoremap <C-w>h <C-\><C-n><C-w>h
-:tnoremap <C-w>j <C-\><C-n><C-w>j
-:tnoremap <C-w>k <C-\><C-n><C-w>k
-:tnoremap <C-w>l <C-\><C-n><C-w>l
-:nnoremap <C-w>h <C-w>h
-:nnoremap <C-w>j <C-w>j
-:nnoremap <C-w>k <C-w>k
-:nnoremap <C-w>l <C-w>l
