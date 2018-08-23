@@ -1,0 +1,17 @@
+[user]
+	email = eric.leijonmarck@gmail.com
+	name = eleijonmarck
+
+[alias]
+
+	# Always use rebase
+	up = pull --rebase=preserve
+
+	# View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' -n 20 --graph --abbrev-commit
+
+	# View the current working tree status using the short format
+	s = status -s
+
+	# Add alias
+	a = add

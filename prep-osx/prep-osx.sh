@@ -74,6 +74,8 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   sudo mdutil -E / > /dev/null
 fi
 
+# Stop iTunes from responding to the keyboard media keys
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
 # Disable smart quotes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
