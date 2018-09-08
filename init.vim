@@ -1,4 +1,7 @@
-﻿" Vim-plug initalization
+﻿" NEOVIM configuration
+" most of the structure is taken from https://github.com/fisadev/fisa-nvim-config
+" thank you https://www.youtube.com/watch?v=vlb3qUiS2ZY
+" Vim-plug initalization
 
 " Avoid modify this section, unless you are very sure of what you are doing
 
