@@ -17,63 +17,6 @@ echo "Installing Xcode Command Line Tools."
 xcode-select --install
 
 ### UI
-echo "Hide the Spotlight icon? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
-fi
-
-echo ""
-echo "Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed before? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  echo 'Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.'
-  sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
-fi
-
-echo ""
-echo "Change indexing order and disable some search results in Spotlight? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  # Yosemite-specific search results (remove them if your are using OS X 10.9 or older):
-  #   MENU_DEFINITION
-  #   MENU_CONVERSION
-  #   MENU_EXPRESSION
-  #   MENU_SPOTLIGHT_SUGGESTIONS (send search queries to Apple)
-  #   MENU_WEBSEARCH             (send search queries to Apple)
-  #   MENU_OTHER
-  defaults write com.apple.spotlight orderedItems -array \
-    '{"enabled" = 1;"name" = "APPLICATIONS";}' \
-    '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-    '{"enabled" = 1;"name" = "DIRECTORIES";}' \
-    '{"enabled" = 1;"name" = "PDF";}' \
-    '{"enabled" = 1;"name" = "FONTS";}' \
-    '{"enabled" = 1;"name" = "CALCULATOR";}' \
-    '{"enabled" = 0;"name" = "DOCUMENTS";}' \
-    '{"enabled" = 0;"name" = "MESSAGES";}' \
-    '{"enabled" = 0;"name" = "CONTACT";}' \
-    '{"enabled" = 0;"name" = "EVENT_TODO";}' \
-    '{"enabled" = 0;"name" = "IMAGES";}' \
-    '{"enabled" = 0;"name" = "BOOKMARKS";}' \
-    '{"enabled" = 0;"name" = "MUSIC";}' \
-    '{"enabled" = 0;"name" = "MOVIES";}' \
-    '{"enabled" = 0;"name" = "PRESENTATIONS";}' \
-    '{"enabled" = 0;"name" = "SPREADSHEETS";}' \
-    '{"enabled" = 0;"name" = "SOURCE";}' \
-    '{"enabled" = 0;"name" = "MENU_DEFINITION";}' \
-    '{"enabled" = 0;"name" = "MENU_OTHER";}' \
-    '{"enabled" = 0;"name" = "MENU_CONVERSION";}' \
-    '{"enabled" = 0;"name" = "MENU_EXPRESSION";}' \
-    '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}' \
-    '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
-    # Load new settings before rebuilding the index
-  killall mds > /dev/null 2>&1
-  # Make sure indexing is enabled for the main volume
-  sudo mdutil -i on / > /dev/null
-  # Rebuild the index from scratch
-  sudo mdutil -E / > /dev/null
-fi
-
 # Stop iTunes from responding to the keyboard media keys
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
@@ -261,7 +204,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     chsh -s /usr/local/bin/bash
 
     # Install more recent versions of some OS X tools.
-    brew install zsh
     brew install vim --override-system-vi
     brew install homebrew/dupes/grep
     brew install homebrew/dupes/openssh
@@ -270,17 +212,19 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install tree
     brew install the_silver_searcher
     brew install fzf
-    # install Neovim
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    brew tap neovim/neovim
-    brew install --HEAD neovim
     brew install ctags
 
     # download python
     # Install Python
     brew install python
     brew install python3
+
+    # python essentials
+    # fixing macosx dependency for not finding TkAgg for matplotlib
+    brew install tcl-tk # https://github.com/pyenv/pyenv/issues/94#issuecomment-437180736
+
+    # python versions
+    brew install pyenv
 
     # Install other useful binaries.
     brew install git
