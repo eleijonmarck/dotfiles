@@ -191,7 +191,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
     brew install findutils
     # Install GNU `sed`, overwriting the built-in `sed`.
-    brew install gnu-sed --with-default-names
+    brew install gnu-sed
     # Install Bash 4.
     brew install bash
     brew tap homebrew/versions
@@ -220,23 +220,11 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install python3
 
     # python essentials
-    # fixing macosx dependency for not finding TkAgg for matplotlib
-    brew install tcl-tk # https://github.com/pyenv/pyenv/issues/94#issuecomment-437180736
-
     # python versions
     brew install pyenv
 
-    # Install other useful binaries.
+    # Install version control binaries.
     brew install git
-    brew install git-lfs
-    brew install git-flow
-    brew install git-extras
-    brew install ssh-copy-id
-
-    brew install libxml2
-    brew install libxslt
-    brew link libxml2 --force
-    brew link libxslt --force
 
     # frontend tools
     brew install node
@@ -249,7 +237,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     echo "Installing Applications"
     brew install caskroom/cask/brew-cask
 
-    brew cask install --appdir="/Applications" vagrant
     brew cask install --appdir="/Applications" slack
     brew cask install --appdir="/Applications" virtualbox
     brew cask install --appdir="/Applications" visual-studio-code
@@ -258,6 +245,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew cask install --appdir="/Applications" google-chrome
     brew cask install --appdir="/Applications" evernote
     brew cask install --appdir="/Applications" spectacle #panes for mac
+    brew cask install --appdir="/Applications" tableplus
 
     # Install developer friendly quick look plugins; see
     # https://github.com/sindresorhus/quick-look-plugins
@@ -270,16 +258,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     brew cleanup
 
-    sudo pip install gsutil
-    sudo pip install ansible
-    sudo pip install bpython
-
     ponysay "It worked"
     # Restart shell
     exec -l $SHELL
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done2>/dev/null &
-
-        echo "Installing vagrant plugins"
-        vagrant plugin install vagrant-triggers
-        vagrant plugin install vagrant-multi-hostsupdater
-
