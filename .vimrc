@@ -46,23 +46,24 @@ Plug 'junegunn/fzf.vim'
 "" linting
 Plug 'w0rp/ale'
 """"""""""""""""""
-" Python autocompletion
+" Python
 " Automatically sort python imports
 Plug 'fisadev/vim-isort'
+" Autoformating for python https://github.com/ambv/black
+Plug 'ambv/black', {'for': 'python'} "
+
 " Go - code
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'fatih/vim-go', { 'for': 'go' }
+
 " HTML
 Plug 'mattn/emmet-vim'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
+
 " TODO is there a better option for neovim?
 " Javascript
 Plug 'othree/yajs.vim', {'for': 'javascript'} " syntax highlighting for ES6
-
-" python
-" https://github.com/ambv/black
-Plug 'ambv/black', {'for': 'python'} " autoformating for python
 
 " Completion Engine
 Plug 'prabirshrestha/async.vim' " requirement langaure server provider
@@ -83,7 +84,6 @@ if vim_plug_just_installed
     echo "Installing Bundles, please ignore key map error messages"
     :PlugInstall
 endif
-
 
 " Needs to be in beginning to be useful
 let mapleader = ','
@@ -275,21 +275,14 @@ highlight clear ALEWarningSign
 
 " Black formatting for python
 " To run Black on save, add the following line to .vimrc or init.vim:
-" disabled for now as work does not use it
-" autocmd BufWritePre *.py execute ':Black'
+autocmd BufWritePre *.py execute ':Black'
 
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = ","
-
 " Switch tabs
 nnoremap <C-h> :tabp <CR>
 nnoremap <C-l> :tabn <CR>
 
-" <leader>,y makes the python formatting acording to yapf
-autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr>
-
-" MUST COME AFTER LEADER MAPPING
 " open vimrc
 nmap <leader>, :e ~/.vimrc<CR>
 
