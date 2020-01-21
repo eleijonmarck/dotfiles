@@ -1,29 +1,13 @@
-﻿" NEOVIM configuration
+" NEOVIM configuration
 " most of the structure is taken from https://github.com/fisadev/fisa-nvim-config
 " thank you https://www.youtube.com/watch?v=vlb3qUiS2ZY
 " Vim-plug initalization
-
-" Avoid modify this section, unless you are very sure of what you are doing
-let vim_plug_just_installed = 0
-let vim_plug_path = expand('~/.config/nvim/autoload/plug.vim')
-if !filereadable(vim_plug_path)
-    echo "Installing Vim-plug..."
-    echo ""
-    silent !mkdir -p ~/.config/nvim/autoload
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    let vim_plug_just_installed = 1
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" manually load vim-plug the first time
-if vim_plug_just_installed
-    :execute 'source '.fnameescape(vim_plug_path)
-endif
-
-"" tried plugins
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-" youcompleteme
-""
 " Active plugins
 " You can disable or add new ones here:
 call plug#begin('~/vim/plugged')
@@ -43,18 +27,14 @@ Plug 'junegunn/fzf.vim'
 """""""""""""""""""""""""""""""""
 
 " Language Plugs and helpers
-"" linting
-Plug 'w0rp/ale'
-""""""""""""""""""
+
 " Python
-" Automatically sort python imports
-Plug 'fisadev/vim-isort'
+"
 " Autoformating for python https://github.com/ambv/black
-Plug 'ambv/black', {'for': 'python'} "
+Plug 'psf/black', {'for': 'python'} "
 
 " Go - code
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-Plug 'fatih/vim-go', { 'for': 'go' }
 
 " HTML
 Plug 'mattn/emmet-vim'
@@ -78,13 +58,6 @@ Plug 'ncm2/ncm2-path'           " filepath completion
 call plug#end()
 
 " ============================================================================
-" Install plugins the first time vim runs
-
-if vim_plug_just_installed
-    echo "Installing Bundles, please ignore key map error messages"
-    :PlugInstall
-endif
-
 " Needs to be in beginning to be useful
 let mapleader = ','
 
@@ -103,6 +76,10 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 
 " GENERAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Enable English spell check
+set spell spelllang=en_us
+
 filetype plugin indent on
 
 syntax on
@@ -243,35 +220,12 @@ nnoremap <leader>d :LspDefinition<CR>
 set rtp+=~/.fzf
 nnoremap <C-p> :FZF! <CR>
 
-" Toggle ale linter
-map <leader>e :ALEToggle <CR>
-map <leader>f :ALEFix <CR>
-
-" Go to next error/warning
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-" nmap <leader>g <Plug>(ale_go_to_definition) " Not working
-
-let g:ale_fix_on_save = 0
-let g:ale_completion_enabled = 0
-let g:ale_maximum_file_size = 500000                " Don't lint large files (> 500KB), it can slow things down
-let g:ale_linters = {}
-let g:ale_linters.python = ['pylint', 'flake8']
-let g:ale_linters.go = ['go', 'golint', 'errcheck']
-let g:ale_linters.javascript = ['eslint', 'xo']
-let g:ale_linters.html = []
-let g:ale_fixers = {}
-let g:ale_fixers.javascript = ['prettier']
-let g:ale_fixers.python = ['yapf', 'trim_whitespace']
-
-let g:ale_python_flake8_options = "max-line-length = 120"
-let g:ale_python_pylint_options = "max-line-length = 120"
-
-let g:ale_sign_error = '💣'
-let g:ale_sign_warning = '⚠'
-
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
+let g:python_version = matchstr(system("python --version | cut -f2 -d' '"), '^[0-9]')
+if g:python_version =~ 3
+    let g:python2_host_prog = "/usr/local/bin/python2"
+else
+    let g:python3_host_prog = "/usr/local/bin/python3"
+endif
 
 " Black formatting for python
 " To run Black on save, add the following line to .vimrc or init.vim:
