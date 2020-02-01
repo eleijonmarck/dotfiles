@@ -16,7 +16,6 @@ call plug#begin('~/vim/plugged')
 Plug 'haishanh/night-owl.vim'
 
 " Plugin tpope, making my life easier
-Plug 'tpope/vim-markdown' " markdown
 Plug 'tpope/vim-surround' " surronds the ',\" and {. :help surround
 Plug 'tpope/vim-commentary' " comments with <gcc> , or <V-gc> for visual mode
 Plug 'tpope/vim-repeat' " makes the . command repearable
@@ -28,32 +27,11 @@ Plug 'junegunn/fzf.vim'
 
 " Language Plugs and helpers
 
-" Python
-"
-" Autoformating for python https://github.com/ambv/black
-Plug 'psf/black', {'for': 'python'} "
-
-" Go - code
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
-
-" HTML
-Plug 'mattn/emmet-vim'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
 
-" TODO is there a better option for neovim?
-" Javascript
-Plug 'othree/yajs.vim', {'for': 'javascript'} " syntax highlighting for ES6
-
-" Completion Engine
-Plug 'prabirshrestha/async.vim' " requirement langaure server provider
-Plug 'prabirshrestha/vim-lsp'   " vim lsp
-Plug 'roxma/nvim-yarp'          " ncm reuiqred
-Plug 'ncm2/ncm2-vim-lsp'        " integrate vim-lsp with ncm
-Plug 'ncm2/ncm2'                " framework for autcomple
-Plug 'ncm2/ncm2-bufword'        " buffer keyword completion
-Plug 'ncm2/ncm2-path'           " filepath completion
-"Plug 'davidhalter/jedi-vim'   " jedi for python
+" language server - https://github.com/neoclide/coc.nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -71,19 +49,15 @@ autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 
-" clear empty spaces at the end of lines on save of python files
-autocmd BufWritePre *.py :%s/\s\+$//e
-
 " GENERAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Enable English spell check
-set spell spelllang=en_us
 
 filetype plugin indent on
 
 syntax on
 set encoding=utf-8 termencoding=utf-8
+
+
 
 " Configure backspace so it acts as it should act
 set backspace=indent,eol,start
@@ -92,7 +66,8 @@ set relativenumber number
 
 " Use spaces instead of tabs
 set expandtab
-set clipboard=unnamedplus
+set clipboard=unnamed
+set clipboard+=unnamedplus
 
 " Copy pasting from/into vim
 vnoremap <C-c> "+y
@@ -146,7 +121,7 @@ set ttyfast           " enabled by default anyway should make scrolling faster
 " splits
 set splitbelow splitright    " spawn vertical splits to the right instead of left"
 
-" when scrolling, keep cursor 3 lines away from screen border
+" when scrolling, keep cursor x lines away from screen border
 set scrolloff=7
 
 " remove trailing whitespace
@@ -168,53 +143,107 @@ colorscheme night-owl
 
 " Plugin specific setup""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""
+" COC settings - language server
+" if hidden is not set, textedit might fail
+set hidden
 
-" Language Server plugins
-" NOTE: this is built upon the open source protocols provided by Microsoft
-" anyother impelentetaion is hjust an abstraction of actually installing a
-" language server and pointing to that language server
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
 
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-" NOTE: you need to install completion sources to get completions. Check
-" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-" make it FAST
-if executable('pyls')
-  " pip install python-language-server
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
 
-if executable('docker-langserver')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'docker-langserver',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'docker-langserver --stdio']},
-        \ 'whitelist': ['dockerfile'],
-        \ })
-endif
+" always show signcolumns
+set signcolumn=yes
 
-if executable('go-langserver')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
-        \ 'whitelist': ['go'],
-        \ })
-endif
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-" set completion heihg to 5
-set pumheight=5
-let ncm2#popup_delay = 5
-let ncm2#complete_length = [[1,1]]
-let g:ncm2#matcher = 'substrfuzzy'
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-" Below goto defiintions with the respective LSP
-nnoremap K :LspHover<CR>
-nnoremap <leader>d :LspDefinition<CR>
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" coc-extensions: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-html', 'coc-python', 'coc-tsserver']
+
+"""""""""
 
 " FZF
 set rtp+=~/.fzf
@@ -222,32 +251,19 @@ nnoremap <C-p> :FZF! <CR>
 
 let g:python_version = matchstr(system("python --version | cut -f2 -d' '"), '^[0-9]')
 if g:python_version =~ 3
-    let g:python2_host_prog = "/usr/local/bin/python2"
+    let g:python2_host_prog = "/bin/python"
 else
-    let g:python3_host_prog = "/usr/local/bin/python3"
+    let g:python3_host_prog = "/bin/python3"
 endif
-
-" Black formatting for python
-" To run Black on save, add the following line to .vimrc or init.vim:
-autocmd BufWritePre *.py execute ':Black'
 
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Switch tabs
-nnoremap <C-h> :tabp <CR>
-nnoremap <C-l> :tabn <CR>
 
 " open vimrc
 nmap <leader>, :e ~/.vimrc<CR>
 
-" Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" enter closes up" enter closes popup if nothing selected
-inoremap <silent> <expr> <CR> (pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : "\<CR>"
-
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" neoterminal
+" neoterminal use esc to exit inster
 :tnoremap <Esc> <C-\><C-n>
