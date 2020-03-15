@@ -54,25 +54,49 @@ export PATH="$PATH:$GOPATH/bin"
 export CLOUDSDK_PYTHON=/usr/bin/python
 
 
+################### GIT STUFF ###################
+github() {
+  if [ ! -d .git ] && ! git rev-parse --git-dir >/dev/null 2>&1; then
+    echo "ERROR: This isnt a git directory" && return false
+  fi
+  git_url=$(git config --get remote.origin.url)
+  if [[ $git_url == https://gitlab* ]]; then
+    url=${git_url%.git}
+  elif [[ $git_url == https://github* ]]; then
+    url=${git_url%.git}
+  elif [[ $git_url == git@gitlab* ]]; then
+    url=${git_url:4}
+    url=${url/\:/\/}
+    url="https://${url%.git}"
+  elif [[ $git_url == git@github* ]]; then
+    url=${git_url:4}
+    url=${url/\:/\/}
+    url="https://${url%.git}"
+  elif [[ $git_url == git://github* ]]; then
+    url=${git_url:4}
+    url=${url/\:/\/}
+    url="https://${url%.git}"
+  else
+    echo "ERROR: Remote origin is invalid" && return false
+  fi
+  case $OSTYPE in
+  darwin*)
+    open $url
+    ;;
+  *)
+    xdg-open $url &> /dev/null &
+    ;;
+  esac
+}
+
 # Aliases
 # git aliases
 # https://github.com/Bash-it/bash-it/blob/master/aliases/available/git.aliases.bash
 alias gcl='git clone'
 alias ga='git add'
-alias grm='git rm'
-alias gap='git add -p'
-alias gall='git add -A'
-alias gf='git fetch --all --prune'
-alias gft='git fetch --all --prune --tags'
-alias gfv='git fetch --all --prune --verbose'
-alias gftv='git fetch --all --prune --tags --verbose'
-alias gus='git reset HEAD'
 alias gpristine='git reset --hard && git clean -dfx'
 alias gclean='git clean -fd'
-alias gm="git merge"
-alias gmv='git mv'
 alias g='git'
-alias get='git'
 alias gs='git status'
 alias gss='git status -s'
 alias gsu='git submodule update --init --recursive'
@@ -126,7 +150,6 @@ alias gt="git tag"
 alias gta="git tag -a"
 alias gtd="git tag -d"
 alias gtl="git tag -l"
-alias gpatch="git format-patch -1"
 # From http://blogs.atlassian.com/2014/10/advanced-git-aliases/
 # Show commits since last pull
 alias gnew="git log HEAD@{1}..HEAD@{0}"
@@ -139,7 +162,6 @@ alias gstb="git stash branch"
 alias gstd="git stash drop"
 alias gstl="git stash list"
 alias gstp="git stash pop"
-alias gh='cd "$(git rev-parse --show-toplevel)"'
 # Show untracked files
 alias gu='git ls-files . --exclude-standard --others'
 
