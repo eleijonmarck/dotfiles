@@ -1,0 +1,70 @@
+{
+    "keyboard.dispatch": "keyCode",
+    "python.formatting.provider": "black",
+    "workbench.colorTheme": "Night Owl",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.incsearch": true,
+    // "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-b>": false,
+        "<C-j>": false,
+        "<C-f>": false
+    },
+    "window.zoomLevel": 0,
+    "extensions.ignoreRecommendations": false,
+    "terminal.integrated.shell.linux": "/usr/bin/zsh",
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "go.useLanguageServer": true,
+    "[go]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+        // Optional: Disable snippets, as they conflict with completion ranking.
+        "editor.snippetSuggestions": "none",
+    },
+    "[go.mod]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+    },
+    "gopls": {
+         // Add parameter placeholders when completing a function.
+        "usePlaceholders": true,
+    
+        // If true, enable additional analyses with staticcheck.
+        // Warning: This will significantly increase memory usage.
+        "staticcheck": false,
+    },
+    "sync.forceUpload": true,
+    "sync.gist": "5f47f08d15160c53b666ee0c799ea6b9",
+    "sync.autoUpload": true,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true
+}
