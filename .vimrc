@@ -8,12 +8,22 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" " Kill bad habits
+" noremap h <NOP>
+" noremap j <NOP>
+" noremap k <NOP>
+" noremap l <NOP>
+
 " Active plugins
 " You can disable or add new ones here:
 call plug#begin('~/vim/plugged')
 
+Plug 'scrooloose/nerdtree'
 " plugin for awesome color
 Plug 'haishanh/night-owl.vim'
+" sane editor config
+Plug 'editorconfig/editorconfig-vim'
+
 
 " Plugin tpope, making my life easier
 Plug 'tpope/vim-surround' " surronds the ',\" and {. :help surround
@@ -30,6 +40,9 @@ Plug 'junegunn/fzf.vim'
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
 
+" Golang
+Plug 'fatih/vim-go', {'for': 'go'}
+
 " language server - https://github.com/neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -39,15 +52,8 @@ call plug#end()
 " Needs to be in beginning to be useful
 let mapleader = ','
 
-" python specific
-let python_highlight_all=1
-" python PEP8 standard
-au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=200 expandtab autoindent fileformat=unix
-
-" Set tab width etc
-autocmd Filetype html setlocal ts=2 sts=2 sw=2
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+" Use markdown syntax for .md
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " GENERAL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -55,19 +61,22 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 filetype plugin indent on
 
 syntax on
+set nocompatible              " required (not compatible with old vi)
+" filetype off                  " required<Paste>
+
 set encoding=utf-8 termencoding=utf-8
-
-
 
 " Configure backspace so it acts as it should act
 set backspace=indent,eol,start
 
-set relativenumber number
+" set numbers
+set number
+" set relative number beside the numbers
+set relativenumber
 
-" Use spaces instead of tabs
-set expandtab
-set clipboard=unnamed
-set clipboard+=unnamedplus
+" setting clipboard to unnamed makes vim extemely slow
+" set clipboard=unnamed
+" set clipboard+=unnamedplus
 
 " Copy pasting from/into vim
 vnoremap <C-c> "+y
@@ -83,10 +92,6 @@ set ignorecase smartcase
 " always show the status line
 set laststatus=2
 
-" indents
-set autoindent
-set wrap "wrap lines
-
 " Height of the command bar
 set cmdheight=2
 
@@ -97,14 +102,6 @@ if has("win16") || has("win32")
 else
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
-
-" wildmode for autocompletion madness
-set wildmode=longest,list,full
-
-" autocompletion of files and commands behaves like shell
-" (complete only the common part, list the options that match)
-set title
-set visualbell noerrorbells
 
 " Search
 set hlsearch      " highlight search terms
@@ -124,8 +121,8 @@ set splitbelow splitright    " spawn vertical splits to the right instead of lef
 " when scrolling, keep cursor x lines away from screen border
 set scrolloff=7
 
-" remove trailing whitespace
-autocmd BufWritePre * %s/\s\+$//e
+" " remove trailing whitespace
+" autocmd BufWritePre * %s/\s\+$//e
 
 "" Use different colorschemes dependant on filetype
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -140,6 +137,14 @@ endif
 " For Neovim 0.1.3 and 0.1.4
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme night-owl
+
+" skeleton templates
+if has("autocmd")
+  augroup templates
+    autocmd BufNewFile Makefile 0r ~/.vim/templates/Makefile
+    autocmd BufNewFile docker-compose.yml 0r ~/.vim/templates/docker-compose.yml
+  augroup END
+endif
 
 " Plugin specific setup""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -241,8 +246,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " coc-extensions: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-let g:coc_global_extensions = ['coc-json', 'coc-css', 'coc-html', 'coc-python', 'coc-tsserver']
-
+let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint']
 """""""""
 
 " FZF
@@ -256,11 +260,18 @@ else
     let g:python3_host_prog = "/bin/python3"
 endif
 
+" Ctrl b to toggle Nerdtree
+nnoremap <C-b> :NERDTreeToggle<CR>
+
+" vim-go not def mapping enable
+let g:go_def_mapping_enabled = 0
+
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " open vimrc
 nmap <leader>, :e ~/.vimrc<CR>
+
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
