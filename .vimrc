@@ -1,4 +1,3 @@
-" NEOVIM configuration
 " most of the structure is taken from https://github.com/fisadev/fisa-nvim-config
 " thank you https://www.youtube.com/watch?v=vlb3qUiS2ZY
 " Vim-plug initalization
@@ -29,9 +28,11 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-surround' " surronds the ',\" and {. :help surround
 Plug 'tpope/vim-commentary' " comments with <gcc> , or <V-gc> for visual mode
 Plug 'tpope/vim-repeat' " makes the . command repearable
+Plug 'tpope/vim-fugitive' " git on steriods inside vim
+Plug 'tpope/vim-rhubarb' " makes so that git can be opened using GBrowse
 
 " Code and files fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 """""""""""""""""""""""""""""""""
 
@@ -42,6 +43,15 @@ Plug 'lilydjwg/colorizer'
 
 " Golang
 Plug 'fatih/vim-go', {'for': 'go'}
+
+" typescript, javascript, graphql
+Plug 'pangloss/vim-javascript'    " JavaScript support
+Plug 'leafgarland/typescript-vim' " TypeScript syntax
+Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+Plug 'jparise/vim-graphql'        " GraphQL syntax
+
+" html
+Plug 'mattn/emmet-vim'
 
 " language server - https://github.com/neoclide/coc.nvim
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -62,12 +72,11 @@ filetype plugin indent on
 
 syntax on
 set nocompatible              " required (not compatible with old vi)
-" filetype off                  " required<Paste>
 
 set encoding=utf-8 termencoding=utf-8
 
 " Configure backspace so it acts as it should act
-set backspace=indent,eol,start
+" set backspace=indent,eol,start
 
 " set numbers
 set number
@@ -76,11 +85,7 @@ set relativenumber
 
 " setting clipboard to unnamed makes vim extemely slow
 " set clipboard=unnamed
-" set clipboard+=unnamedplus
-
-" Copy pasting from/into vim
-vnoremap <C-c> "+y
-vnoremap <C-v> "+P
+set clipboard=unnamedplus
 
 " no backupfiles
 set nowritebackup noswapfile nobackup
@@ -88,6 +93,22 @@ set nowritebackup noswapfile nobackup
 " case sensitivity
 " When searching try to be smart about cases
 set ignorecase smartcase
+
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+
+set smarttab      " insert tabs on the start of a line according to
+"                   "    shiftwidth, not tabstop
+" Normal action
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+filetype plugin indent on
+
+if has("autocmd")
+    " If the filetype is Makefile then we need to use tabs
+    " So do not expand tabs into space.
+    autocmd FileType make set noexpandtab
+endif
 
 " always show the status line
 set laststatus=2
@@ -122,7 +143,7 @@ set splitbelow splitright    " spawn vertical splits to the right instead of lef
 set scrolloff=7
 
 " " remove trailing whitespace
-" autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\s\+$//e
 
 "" Use different colorschemes dependant on filetype
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -145,8 +166,12 @@ if has("autocmd")
     autocmd BufNewFile docker-compose.yml 0r ~/.vim/templates/docker-compose.yml
   augroup END
 endif
-
 " Plugin specific setup""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" disable vim-go gd in favor of coc
+let g:go_def_mapping_enabled = 0
+
 
 """""""""""""
 " COC settings - language server
@@ -209,7 +234,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+nmap <F2> <Plug>(coc-rename)
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -243,15 +268,32 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " coc-extensions: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-let g:coc_global_extensions = ['coc-emoji', 'coc-eslint', 'coc-prettier', 'coc-tsserver','coc-tslint', 'coc-tslint-plugin', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint', 'coc-pairs', 'coc-sh']
 """""""""
-
 " FZF
+" https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko
 set rtp+=~/.fzf
 nnoremap <C-p> :FZF! <CR>
+" Tell FZF to use RG - so we can skip .gitignore files even if not using
+" :GitFiles search
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+" If you want gitignored files:
+"let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
+
+"" Enable per-command history
+" - History files will be stored in the specified directory
+" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+"   'previous-history' instead of 'down' and 'up'.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" search within files
+nnoremap <silent> <C-f> :Rg<CR>
+" :Rg option also searches for file name in addition to the phrase.
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
 
 let g:python_version = matchstr(system("python --version | cut -f2 -d' '"), '^[0-9]')
 if g:python_version =~ 3
@@ -262,19 +304,26 @@ endif
 
 " Ctrl b to toggle Nerdtree
 nnoremap <C-b> :NERDTreeToggle<CR>
-
-" vim-go not def mapping enable
-let g:go_def_mapping_enabled = 0
+"" NERDTree configuration
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__', '\.git']
+let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowBookmarks=1
+let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+let g:NERDTreeWinSize = 50
+let g:NERDTreeShowHidden=1 " hidden files by default
+let g:nerdtree_tabs_focus_on_files=1
 
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" jump between jumps
+" same as in visual studio code
+nnoremap <C-t> <C-o>
+nnoremap <C-i> <C-i>
+
 " open vimrc
 nmap <leader>, :e ~/.vimrc<CR>
-
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " neoterminal use esc to exit inster
 :tnoremap <Esc> <C-\><C-n>
