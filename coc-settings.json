@@ -1,10 +1,15 @@
 {
   "languageserver": {
-    "golang": {
+    "go": {
       "command": "gopls",
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "rootPatterns": ["go.mod"],
+      "trace.server": "verbose",
       "filetypes": ["go"]
     }
   },
-  "tsserver.npm": "/usr/local/bin/npm"
+  "go.goplsOptions": {
+    "completeUnimported": true
+  },
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "typescript", "javascript"],
+  "eslint.autoFixOnSave": true
 }
