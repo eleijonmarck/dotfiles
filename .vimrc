@@ -279,15 +279,12 @@ set rtp+=~/.fzf
 nnoremap <C-p> :FZF! <CR>
 " Tell FZF to use RG - so we can skip .gitignore files even if not using
 " :GitFiles search
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+" let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+" https://stackoverflow.com/questions/61865932/how-to-get-fzf-vim-ignore-node-modules-and-git-folders
+let $FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
+
 " If you want gitignored files:
 "let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
-
-"" Enable per-command history
-" - History files will be stored in the specified directory
-" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
-"   'previous-history' instead of 'down' and 'up'.
-let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " search within files
 nnoremap <silent> <C-f> :Rg<CR>
