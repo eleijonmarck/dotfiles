@@ -274,23 +274,37 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'coc-css', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-stylelint', 'coc-pairs', 'coc-sh']
 """""""""
 " FZF
-" https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko
 set rtp+=~/.fzf
-nnoremap <C-p> :FZF! <CR>
-" Tell FZF to use RG - so we can skip .gitignore files even if not using
-" :GitFiles search
-" let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+" let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
 " https://stackoverflow.com/questions/61865932/how-to-get-fzf-vim-ignore-node-modules-and-git-folders
-let $FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
+" possibility: add --no-ignore-vcs to tell it to NOT ignore version control files
 
-" If you want gitignored files:
-"let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
 
-" search within files
-nnoremap <silent> <C-f> :Rg<CR>
-" :Rg option also searches for file name in addition to the phrase.
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
+let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
+function! FloatingFZF()
+  let buf = nvim_create_buf(v:false, v:true)
+  call setbufvar(buf, '&signcolumn', 'no')
+
+  let height = float2nr(10)
+  let width = float2nr(80)
+  let horizontal = float2nr((&columns - width) / 2)
+  let vertical = 1
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+
+  call nvim_open_win(buf, v:true, opts)
+endfunction
 
 let g:python_version = matchstr(system("python --version | cut -f2 -d' '"), '^[0-9]')
 if g:python_version =~ 3
@@ -318,6 +332,11 @@ let g:nerdtree_tabs_focus_on_files=1
 " same as in visual studio code
 nnoremap <C-t> <C-o>
 nnoremap <C-i> <C-i>
+
+" to make me forget about esc or easier esc
+imap jk <Esc>
+imap kj <Esc>
+imap jj <Esc>
 
 " open vimrc
 nmap <leader>, :e ~/.vimrc<CR>
