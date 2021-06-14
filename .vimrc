@@ -25,7 +25,6 @@ Plug 'editorconfig/editorconfig-vim'
 
 
 " Plugin tpope, making my life easier
-Plug 'tpope/vim-surround' " surronds the ',\" and {. :help surround
 Plug 'tpope/vim-commentary' " comments with <gcc> , or <V-gc> for visual mode
 Plug 'tpope/vim-repeat' " makes the . command repearable
 Plug 'tpope/vim-fugitive' " git on steriods inside vim
@@ -278,8 +277,6 @@ set rtp+=~/.fzf
 " let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
 " https://stackoverflow.com/questions/61865932/how-to-get-fzf-vim-ignore-node-modules-and-git-folders
 " possibility: add --no-ignore-vcs to tell it to NOT ignore version control files
-
-
 nnoremap <silent> <C-p> :call fzf#vim#files('.', {'options': '--prompt ""'})<CR>
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 let $FZF_DEFAULT_OPTS=' --color=dark --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,prompt:0,pointer:12,marker:4,spinner:11,header:-1 --layout=reverse  --margin=1,4'

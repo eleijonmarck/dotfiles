@@ -28,16 +28,18 @@ sudo apt-get install -y neovim
 
 # Create swap file
 # (https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-18-04/)
-sudo fallocate -l 32G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-sudo bash -c "echo '/swapfile swap swap defaults 0 0' >> /etc/fstab"
-sudo swapon --show
+#! /bin/bash -
+if [[ ! -e /swapfile ]]; then
+    sudo fallocate -l 32G /swapfile
+    sudo chmod 600 /swapfile
+    sudo mkswap /swapfile
+    sudo swapon /swapfile
+    sudo bash -c "echo '/swapfile swap swap defaults 0 0' >> /etc/fstab"
+    sudo swapon --show
 
-# Minimal swapiness recommended
-sysctl vm.swappiness=1
-
+    # Minimal swapiness recommended
+    sysctl vm.swappiness=1
+fi
 # Hibernate after 10 minutes
 # echo "[Sleep]
 # HibernateDelaySec=600" >> /etc/systemd/sleep.conf
@@ -69,9 +71,6 @@ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
 # nvm
 git clone https://github.com/nvm-sh/nvm.git ~/.nvm
-
-# goenv
-git clone https://github.com/syndbg/goenv.git ~/.goenv
 
 # docker
 curl -fsSL https://get.docker.com -o get-docker.sh
