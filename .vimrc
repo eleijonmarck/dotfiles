@@ -274,6 +274,18 @@ let g:coc_global_extensions = ['coc-eslint', 'coc-prettier', 'coc-tsserver', 'co
 """""""""
 " FZF
 set rtp+=~/.fzf
+"
+" search files
+nnoremap <silent> <C-f> :Files<CR>
+" search inside files
+nnoremap <silent> <Leader>f :Rg<CR>
+" search open buffers
+nnoremap <silent> <Leader>b :Buffers<CR>
+
+
+
+
+" search buffers and files
 " let $FZF_DEFAULT_COMMAND='rg --files --hidden -g "!{node_modules/*,.git/*}"'
 " https://stackoverflow.com/questions/61865932/how-to-get-fzf-vim-ignore-node-modules-and-git-folders
 " possibility: add --no-ignore-vcs to tell it to NOT ignore version control files
@@ -286,8 +298,8 @@ function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
   call setbufvar(buf, '&signcolumn', 'no')
 
-  let height = float2nr(10)
-  let width = float2nr(80)
+  let height = float2nr(30)
+  let width = float2nr(140)
   let horizontal = float2nr((&columns - width) / 2)
   let vertical = 1
 
@@ -303,6 +315,7 @@ function! FloatingFZF()
   call nvim_open_win(buf, v:true, opts)
 endfunction
 
+
 let g:python_version = matchstr(system("python --version | cut -f2 -d' '"), '^[0-9]')
 if g:python_version =~ 3
     let g:python2_host_prog = "/bin/python"
@@ -310,6 +323,7 @@ else
     let g:python3_host_prog = "/bin/python3"
 endif
 
+" NERDTREEEE!!!!!!!!!!!!!!!"
 " Ctrl b to toggle Nerdtree
 nnoremap <C-b> :NERDTreeToggle<CR>
 "" NERDTree configuration
@@ -321,14 +335,13 @@ let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 let g:NERDTreeShowHidden=1 " hidden files by default
 let g:nerdtree_tabs_focus_on_files=1
-
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " jump between jumps
 " same as in visual studio code
 nnoremap <C-t> <C-o>
-nnoremap <C-i> <C-i>
+
 
 " to make me forget about esc or easier esc
 imap jk <Esc>
