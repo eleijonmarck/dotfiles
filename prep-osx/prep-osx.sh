@@ -9,6 +9,9 @@
 # Ask for the administrator password upfront
 sudo -v
 
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
+
 # Sets the system language to english
 languagesetup -langspec English
 
@@ -155,7 +158,12 @@ echo "Move the dock to the left"
 defaults write com.apple.dock orientation left
 
 echo "Kill affected applications"
-for app in Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+    "Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
+    "Opera" "Safari" "SizeUp" "Numbers" "Keynote" "TV" "SystemUIServer" \
+    "Transmission" "Twitter" "iCal"; do
+    killall "${app}" > /dev/null 2>&1
+done
 
 # Install command-line tools using Homebrew.
 
@@ -167,11 +175,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     if test !$(which brew); then
         echo "Installing homebrew..."
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-
-    if test !$(which brew); then
-	echo "Installing oh-my-zsh..."
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     fi
 
     # Make sure we’re using the latest Homebrew.
@@ -186,8 +189,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
 
-    # Install some other useful utilities like `sponge`.
-    brew install moreutils
     # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
     brew install findutils
     # Install GNU `sed`, overwriting the built-in `sed`.
@@ -200,8 +201,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     echo "Adding the newly installed shell to the list of allowed shells"
     # Prompts for password
     sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-    # Change to the new shell, prompts for password
-    chsh -s /usr/local/bin/bash
 
     # Install more recent versions of some OS X tools.
     brew install vim --override-system-vi
@@ -238,12 +237,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install caskroom/cask/brew-cask
 
     brew cask install --appdir="/Applications" slack
-    brew cask install --appdir="/Applications" virtualbox
     brew cask install --appdir="/Applications" visual-studio-code
     brew cask install --appdir="/Applications" iterm2
     brew cask install --appdir="/Applications" 1password
     brew cask install --appdir="/Applications" google-chrome
-    brew cask install --appdir="/Applications" evernote
     brew cask install --appdir="/Applications" spectacle #panes for mac
     brew cask install --appdir="/Applications" tableplus
 
