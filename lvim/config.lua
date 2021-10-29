@@ -17,10 +17,14 @@ lvim.colorscheme = "onedarker"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+-- map diagnostics to leader , a, n for same file
+-- lvim.keys.normal_mode["<leader>an"] = "<cmd>vim.diagnostic.goto_next()<cr>"
+-- lvim.keys.normal_mode["<leader>ap"] = "<cmd>vim.diagnostic.goto_prev()<cr>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- lvim.builtin.telescope.on_config_done = function()
@@ -37,30 +41,41 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["t"] = {
-	name = "+Trouble",
-	r = { "<cmd>Trouble lsp_references<cr>", "References" },
-	f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-	d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
-	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-	w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
-}
+-- lvim.builtin.which_key.mappings["t"] = {
+--   name = "+Trouble",
+--   r = { "<cmd>Trouble lsp_references<cr>", "References" },
+--   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+--   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+--   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+--   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+--   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+-- }
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.side = "left"
+lvim.builtin.terminal.direction = "horizontal"
+lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = {
+  "bash",
+  "c",
+  "javascript",
+  "json",
+  "lua",
+  "python",
+  "typescript",
+  "css",
+  "rust",
+  -- "java",
+  "yaml",
+}
+
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
-
---#region
-lvim.builtin.nvimtree.hide_dotfiles = false
 
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers
@@ -101,45 +116,42 @@ lvim.builtin.nvimtree.hide_dotfiles = false
 --   }
 -- }
 
--- Language configuration
--- typescript
--- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
-lvim.lang.typescript.formatters = { { exe = "prettier" } }
-lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
--- exe value can be "eslint" or "eslint_d"
-lvim.lang.typescript.linters = { { exe = "eslint" } }
-lvim.lang.typescriptreact.linters = lvim.lang.typescript.linters
-
--- javascript
--- exe value can be "prettier", "prettierd", "eslint", or "eslint_d"
-lvim.lang.javascript.formatters = { { exe = "prettier" } }
-lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
--- exe value can be "eslint" or "eslint_d"
-lvim.lang.javascript.linters = { { exe = "eslint" } }
-lvim.lang.javascriptreact.linters = lvim.lang.javascript.linters
-
--- go
 -- exe value can be "gofmt", "goimports", or "gofumpt"
-lvim.lang.go.formatters = { { exe = "goimports" } }
+-- lvim.lang.go.formatters = {{ exe = "goimports" }}
 
--- rust
--- exe value can be "rustfmt"
-lvim.lang.rust.formatters = { { exe = "rustfmt" } }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup({
+  {exe = "prettierd", filetypes = {
+  "json",
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+} },
+  {exe = "goimports", filetypes={"go"}}
+})
 
--- -- lua
-lvim.lang.lua.formatters = { { exe = "stylua" } }
-lvim.lang.lua.linters = { { exe = "luacheck" } }
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup({{exe = "eslint_d", filetypes = { 
+   "json",
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+} }})
 
 -- Additional Plugins
-lvim.plugins = {
-	{ "folke/tokyonight.nvim" },
-	{
-		"folke/trouble.nvim",
-		cmd = "TroubleToggle",
-	},
-}
+-- lvim.plugins = {
+--     {
+--       "folke/trouble.nvim",
+--       cmd = "TroubleToggle",
+--     },
+-- }
+
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
+
+

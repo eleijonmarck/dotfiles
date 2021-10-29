@@ -35,7 +35,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # setting the editor to vim
-export VISUAL=vim
+alias vim="nvim"
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # fzf I love you
@@ -63,52 +64,16 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # set python for gcloud command
 export CLOUDSDK_PYTHON=/usr/bin/python
 
-################### GIT STUFF ###################
-github() {
-  if [ ! -d .git ] && ! git rev-parse --git-dir >/dev/null 2>&1; then
-    echo "ERROR: This isnt a git directory" && return false
-  fi
-  git_url=$(git config --get remote.origin.url)
-  if [[ $git_url == https://gitlab* ]]; then
-    url=${git_url%.git}
-  elif [[ $git_url == https://github* ]]; then
-    url=${git_url%.git}
-  elif [[ $git_url == git@gitlab* ]]; then
-    url=${git_url:4}
-    url=${url/\:/\/}
-    url="https://${url%.git}"
-  elif [[ $git_url == git@github* ]]; then
-    url=${git_url:4}
-    url=${url/\:/\/}
-    url="https://${url%.git}"
-  elif [[ $git_url == git://github* ]]; then
-    url=${git_url:4}
-    url=${url/\:/\/}
-    url="https://${url%.git}"
-  else
-    echo "ERROR: Remote origin is invalid" && return false
-  fi
-  case $OSTYPE in
-  darwin*)
-    open $url
-    ;;
-  *)
-    xdg-open $url &> /dev/null &
-    ;;
-  esac
-}
+## GIT
 
 # Aliases
 # git aliases
-# https://github.com/Bash-it/bash-it/blob/master/aliases/available/git.aliases.bash
-alias gcl='git clone'
 alias ga='git add'
 alias gpristine='git reset --hard && git clean -dfx'
 alias gclean='git clean -fd'
 alias g='git'
 alias gs='git status'
 alias gss='git status -s'
-alias gsu='git submodule update --init --recursive'
 alias gl='git pull'
 alias glum='git pull upstream master'
 alias gpr='git pull --rebase'
@@ -125,14 +90,13 @@ alias gds='git diff --staged'
 alias gdv='git diff -w "$@" | vim -R -'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
+alias gcaa="git commit -a --amend -C HEAD" # Add uncommitted and unstaged changes to the last commit
 alias gcm='git commit -v -m'
 alias gcam="git commit -v -am"
 alias gci='git commit --interactive'
 alias gcamd='git commit --amend'
 alias gb='git branch'
 alias gcount='git shortlog -sn'
-alias gcp='git cherry-pick'
-alias gcpx='git cherry-pick -x'
 alias gco='git checkout'
 alias gcom='git checkout master'
 alias gcb='git checkout -b'
@@ -143,8 +107,3 @@ alias gg="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset
 alias ggs="gg --stat"
 alias gsl="git shortlog -sn"
 alias gwc="git whatchanged"
-# From http://blogs.atlassian.com/2014/10/advanced-git-aliases/
-# Show commits since last pull
-# Add uncommitted and unstaged changes to the last commit
-alias gcaa="git commit -a --amend -C HEAD"
-
