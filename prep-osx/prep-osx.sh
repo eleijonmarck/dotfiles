@@ -227,7 +227,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install git
 
     # frontend tools
-    brew install node
+    brew install gvm
+    brew install nvm
 
     # database
     brew install postgresql
