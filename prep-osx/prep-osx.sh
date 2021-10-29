@@ -227,7 +227,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install git
 
     # frontend tools
-    brew install node
+    brew install gvm
+    brew install nvm
 
     # database
     brew install postgresql
@@ -249,6 +250,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo
     brew install fonts/font-hack
 
+    # best fontttty
+    brew tap homebrew/cask-fonts
+    brew install --cask font-hack-nerd-font
+    
     # install fun
     brew install ponysay
     brew install cmatrix

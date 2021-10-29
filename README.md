@@ -6,20 +6,13 @@ Learn to love Vim, because it's worth the effort.
 ## Contents
 
 + zsh configuration
-+ vim configuration
++ lunar/neo - vim configuration
 + git configuration
 + osx configuration
-+ Homebrew files (brew.sh)
++ ubuntu configuration
 
-## ZSH Plugins
-By default, the `.zshrc` file will source any file within `dotfiles/common`
-
-## Vim Plugins
-If you are a first timer try to use some plugins and commands each new week or so.
-Vim plugins are managed with [vim-plug](https://github.com/junegunn/vim-plug). 
-To install, run `vim +PlugInstall`, or in vim `:PluginInstall`.
-
-Also map the Capslock-key to Esc!!!
+## Capslock - ESC
+ map the Capslock-key to Esc!!!
 
 ## Install OSX
 
@@ -27,9 +20,6 @@ Also map the Capslock-key to Esc!!!
 1. install git via; `brew install git`
 1. `git clone https://github.com/eleijonmarck/dotfiles.git`
 1. `cd ~/dotfiles`
-1. `sh brew.sh`
-1. `sh install.sh`
-
 
 ---
 
