@@ -246,8 +246,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     # Install developer friendly quick look plugins; see
     # https://github.com/sindresorhus/quick-look-plugins
-    brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
-    brew cask install caskroom/fonts/font-hack
+    brew install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
+    brew install fonts/font-hack
 
     # install fun
     brew install ponysay
