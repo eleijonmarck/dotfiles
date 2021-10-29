@@ -9,6 +9,9 @@
 # Ask for the administrator password upfront
 sudo -v
 
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
+
 # Sets the system language to english
 languagesetup -langspec English
 
@@ -155,7 +158,12 @@ echo "Move the dock to the left"
 defaults write com.apple.dock orientation left
 
 echo "Kill affected applications"
-for app in Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+    "Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
+    "Opera" "Safari" "SizeUp" "Numbers" "Keynote" "TV" "SystemUIServer" \
+    "Transmission" "Twitter" "iCal"; do
+    killall "${app}" > /dev/null 2>&1
+done
 
 # Install command-line tools using Homebrew.
 
@@ -167,11 +175,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     if test !$(which brew); then
         echo "Installing homebrew..."
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
-
-    if test !$(which brew); then
-	echo "Installing oh-my-zsh..."
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     fi
 
     # Make sure we’re using the latest Homebrew.
@@ -186,8 +189,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
 
-    # Install some other useful utilities like `sponge`.
-    brew install moreutils
     # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
     brew install findutils
     # Install GNU `sed`, overwriting the built-in `sed`.
@@ -200,14 +201,13 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     echo "Adding the newly installed shell to the list of allowed shells"
     # Prompts for password
     sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
-    # Change to the new shell, prompts for password
-    chsh -s /usr/local/bin/bash
 
     # Install more recent versions of some OS X tools.
-    brew install vim --override-system-vi
-    brew install homebrew/dupes/grep
-    brew install homebrew/dupes/openssh
-    brew install homebrew/dupes/screen
+    brew install --HEAD luajit
+    brew install --HEAD neovim
+    brew install homebrew/grep
+    brew install homebrew/openssh
+    brew install homebrew/screen
     # cli tools
     brew install tree
     brew install the_silver_searcher
@@ -235,22 +235,19 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     # Install Cask
     echo "Installing Applications"
-    brew install caskroom/cask/brew-cask
 
-    brew cask install --appdir="/Applications" slack
-    brew cask install --appdir="/Applications" virtualbox
-    brew cask install --appdir="/Applications" visual-studio-code
-    brew cask install --appdir="/Applications" iterm2
-    brew cask install --appdir="/Applications" 1password
-    brew cask install --appdir="/Applications" google-chrome
-    brew cask install --appdir="/Applications" evernote
-    brew cask install --appdir="/Applications" spectacle #panes for mac
-    brew cask install --appdir="/Applications" tableplus
+    brew install --cask --appdir="/Applications" slack
+    brew install --cask --appdir="/Applications" visual-studio-code
+    brew install --cask --appdir="/Applications" iterm2
+    brew install --cask --appdir="/Applications" 1password
+    brew install --cask --appdir="/Applications" google-chrome
+    brew install --cask --appdir="/Applications" spectacle #panes for mac
+    brew install --cask --appdir="/Applications" tableplus
 
     # Install developer friendly quick look plugins; see
     # https://github.com/sindresorhus/quick-look-plugins
-    brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
-    brew cask install caskroom/fonts/font-hack
+    brew install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo
+    brew install fonts/font-hack
 
     # install fun
     brew install ponysay
