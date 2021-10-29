@@ -203,7 +203,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
 
     # Install more recent versions of some OS X tools.
-    brew install vim --override-system-vi
+    brew install --HEAD luajit
+    brew install --HEAD neovim
     brew install homebrew/grep
     brew install homebrew/openssh
     brew install homebrew/screen
@@ -234,19 +235,18 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     # Install Cask
     echo "Installing Applications"
-    brew install caskroom/cask/brew-cask
 
-    brew cask install --appdir="/Applications" slack
-    brew cask install --appdir="/Applications" visual-studio-code
-    brew cask install --appdir="/Applications" iterm2
-    brew cask install --appdir="/Applications" 1password
-    brew cask install --appdir="/Applications" google-chrome
-    brew cask install --appdir="/Applications" spectacle #panes for mac
-    brew cask install --appdir="/Applications" tableplus
+    brew install --cask --appdir="/Applications" slack
+    brew install --cask --appdir="/Applications" visual-studio-code
+    brew install --cask --appdir="/Applications" iterm2
+    brew install --cask --appdir="/Applications" 1password
+    brew install --cask --appdir="/Applications" google-chrome
+    brew install --cask --appdir="/Applications" spectacle #panes for mac
+    brew install --cask --appdir="/Applications" tableplus
 
     # Install developer friendly quick look plugins; see
     # https://github.com/sindresorhus/quick-look-plugins
-    brew install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
+    brew install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo
     brew install fonts/font-hack
 
     # install fun
