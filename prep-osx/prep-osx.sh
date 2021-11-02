@@ -103,14 +103,6 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   defaults write "Apple Global Domain" "_HIHideMenuBar" 1
 fi
 
-echo "Set Dock to auto-hide and remove the auto-hiding delay? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  defaults write com.apple.dock autohide -bool true
-  defaults write com.apple.dock autohide-delay -float 0
-  defaults write com.apple.dock autohide-time-modifier -float 0
-fi
-
 echo "Dont animate opening applications from the Dock"
 defaults write com.apple.dock launchanim -bool false
 
@@ -119,9 +111,6 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 
 echo "Disable hide animation on Dock"
 defaults write com.apple.dock autohide-time-modifier -int 0
-
-echo "Move the dock to the left"
-defaults write com.apple.dock orientation left
 
 echo "Kill affected applications"
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
@@ -180,21 +169,16 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install fzf
     brew install ctags
 
-    # download python
-    # Install Python
-    brew install python
-    brew install python3
-
-    # python essentials
-    # python versions
-    brew install pyenv
-
     # Install version control binaries.
     brew install git
 
-    # frontend tools
+    # backend stuffz
     brew install gvm
+    brew install rust
+    
+    # frontend tools
     brew install nvm
+    brew install jq
 
     # database
     brew install postgresql
@@ -214,8 +198,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     # Install developer friendly quick look plugins; see
     # https://github.com/sindresorhus/quick-look-plugins
     brew install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo
-    brew install fonts/font-hack
-
     # best fontttty
     brew tap homebrew/cask-fonts
     brew install --cask font-hack-nerd-font
@@ -226,7 +208,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     brew cleanup
 
-    ponysay "It worked"
     # Restart shell
     exec -l $SHELL
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done2>/dev/null &
