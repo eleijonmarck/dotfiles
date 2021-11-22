@@ -101,22 +101,18 @@ chflags nohidden ~/Library
 defaults write com.apple.dock wvous-tl-corner -int 10
 defaults write com.apple.dock wvous-tl-modifier -int 0
 
+# Stop bouncing dock icon notifications
+defaults write com.apple.dock no-bouncing -bool TRUE
+
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
-# Disable send and reply animations in Mail.app
-defaults write com.apple.mail DisableReplyAnimations -bool true
-defaults write com.apple.mail DisableSendAnimations -bool true
-
-# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
-defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
 #echo "only use UTF-8 in Terminal.app"
 #defaults write com.apple.terminal StringEncodings -array 4
 
-echo "Enable subpixel font rendering on non-Apple LCDs"
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
+# echo "Enable subpixel font rendering on non-Apple LCDs"
+# defaults write NSGlobalDomain AppleFontSmoothing -int 0
 
 #####
 # Dock & Mission Control
@@ -154,9 +150,6 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 echo "Disable hide animation on Dock"
 defaults write com.apple.dock autohide-time-modifier -int 0
 
-echo "Move the dock to the left"
-defaults write com.apple.dock orientation left
-
 echo "Kill affected applications"
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
     "Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
@@ -188,19 +181,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install coreutils
     sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
-
     # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
     brew install findutils
     # Install GNU `sed`, overwriting the built-in `sed`.
     brew install gnu-sed
-    # Install Bash 4.
-    brew install bash
-    brew tap homebrew/versions
-    brew install bash-completion2
-    # We installed the new shell, now we have to activate it
-    echo "Adding the newly installed shell to the list of allowed shells"
-    # Prompts for password
-    sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
 
     # Install more recent versions of some OS X tools.
     brew install --HEAD luajit
@@ -214,25 +198,17 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install fzf
     brew install ctags
 
-    # download python
-    # Install Python
-    brew install python
-    brew install python3
-
-    # python essentials
-    # python versions
-    brew install pyenv
+    # help understanding cli commands
+    brew install tldr
 
     # Install version control binaries.
     brew install git
 
     # frontend tools
-    brew install gvm
     brew install nvm
 
-    # database
-    brew install postgresql
-    brew install pgcli
+    # make gifs
+    brew install --cask kap
 
     # Install Cask
     echo "Installing Applications"
@@ -242,8 +218,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install --cask --appdir="/Applications" iterm2
     brew install --cask --appdir="/Applications" 1password
     brew install --cask --appdir="/Applications" google-chrome
-    brew install --cask --appdir="/Applications" spectacle #panes for mac
-    brew install --cask --appdir="/Applications" tableplus
+    brew install --cask --appdir="/Applications" rectangle #panes for mac
+    brew install --cask --appdir="/Applications" notion
 
     # Install developer friendly quick look plugins; see
     # https://github.com/sindresorhus/quick-look-plugins

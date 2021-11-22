@@ -1,6 +1,6 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -18,51 +18,38 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-#
-source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# activates fzf, use **<TAB> (or e.g. kill -9 <TAB>) to start searching:
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# mac osx specifc for enabling fzf
+bindkey "ç" fzf-cd-widget
 
-# Python Version Manager
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+# nvm
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+# gvm
+[[ -s "/Users/eleijonmarck/.gvm/scripts/gvm" ]] && source "/Users/eleijonmarck/.gvm/scripts/gvm"
 
 # setting the editor to vim
 alias vim="nvim"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+# activates fzf, use **<TAB> (or e.g. kill -9 <TAB>) to start searching:
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # fzf I love you
 export FZF_DEFAULT_COMMAND='rg --files'
 
-# add kubeconfig for k9s
-export KUBECONFIG=$HOME/.kube/config
-
-# exporting nvm settings
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# setting GOENV
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
-export PATH="$GOROOT/bin:$PATH"
-[[ -s "/home/eleijonmarck/.gvm/scripts/gvm" ]] && source "/home/eleijonmarck/.gvm/scripts/gvm"
-
-
-autoload -U +X bashcompinit && bashcompinit
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 # set python for gcloud command
 export CLOUDSDK_PYTHON=/usr/bin/python
+
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+fpath+=~/.zfunc
 
 ## GIT
 
@@ -107,3 +94,25 @@ alias gg="git log --graph --pretty=format:'%C(bold)%h%Creset%C(magenta)%d%Creset
 alias ggs="gg --stat"
 alias gsl="git shortlog -sn"
 alias gwc="git whatchanged"
+ulimit -S -n 4096
+
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# lvim to path
+export PATH=$PATH:$HOME/.local/bin
+

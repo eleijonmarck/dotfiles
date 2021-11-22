@@ -67,6 +67,7 @@ call plug#end()
 " GENERAL - default
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " default options
+set clipboard+=unnamedplus " might come with performance issues
 set completeopt=menu,menuone,noselect " better autocomplete options
 set mouse=a " if I accidentally use the mouse
 set splitright " splits to the right
@@ -115,6 +116,15 @@ nnoremap <C-t> <C-o>
 imap jk <Esc>
 imap kj <Esc>
 imap jj <Esc>
+
+" make yank behave like it should
+" primegen
+" https://www.youtube.com/watch?v=hSHATqh8svM
+nnoremap Y yg$ 
+" keep things centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
 
 " open vimrc
 nmap <leader><leader> :e ~/.vimrc<CR>
