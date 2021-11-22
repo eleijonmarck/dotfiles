@@ -19,33 +19,19 @@ echo "Installing Xcode Command Line Tools."
 # Install Xcode command line tools
 xcode-select --install
 
-### UI
-# Stop iTunes from responding to the keyboard media keys
-launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
-
-# Disable smart quotes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-
-# Disable smart dashes as they’re annoying when typing code
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
-# Enable full keyboard access for all controls
-# (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-
-# Disable press-and-hold for keys in favor of key repeat"
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# set qvartz windows to repeat
+defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write -g InitialKeyRepeat -int 12 # normal minimum is 15 (225 ms)
+defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
 echo "Setting trackpad & mouse speed to a reasonable number"
 defaults write -g com.apple.trackpad.scaling 2
 defaults write -g com.apple.mouse.scaling 2.5
 
 # Disable auto-correct
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
@@ -58,7 +44,7 @@ defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write -g AppleShowAllExtensions -bool true
 
 # Finder: show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
@@ -72,14 +58,8 @@ defaults write com.apple.finder QLEnableTextSelection -bool true
 # Display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
-# When performing a search, search the current folder by default
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-# Enable spring loading for directories
-defaults write NSGlobalDomain com.apple.springing.enabled -bool true
 
 # Tweak the spring loading delay for directories
 defaults write NSGlobalDomain com.apple.springing.delay -float .5
@@ -89,10 +69,6 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
-
-# Use list view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
@@ -111,9 +87,12 @@ defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 #echo "only use UTF-8 in Terminal.app"
 #defaults write com.apple.terminal StringEncodings -array 4
 
+<<<<<<< HEAD
 # echo "Enable subpixel font rendering on non-Apple LCDs"
 # defaults write NSGlobalDomain AppleFontSmoothing -int 0
 
+=======
+>>>>>>> 12de8222344ea5ffa277ebbf64533dde039a3296
 #####
 # Dock & Mission Control
 #####
@@ -131,14 +110,6 @@ echo "Hide the menu bar? (y/n)"
 read -r response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
   defaults write "Apple Global Domain" "_HIHideMenuBar" 1
-fi
-
-echo "Set Dock to auto-hide and remove the auto-hiding delay? (y/n)"
-read -r response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-  defaults write com.apple.dock autohide -bool true
-  defaults write com.apple.dock autohide-delay -float 0
-  defaults write com.apple.dock autohide-time-modifier -float 0
 fi
 
 echo "Dont animate opening applications from the Dock"
@@ -198,14 +169,18 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install fzf
     brew install ctags
 
-    # help understanding cli commands
+    # tldr
     brew install tldr
-
     # Install version control binaries.
     brew install git
 
+    # backend stuffz
+    brew install gvm
+    brew install rust
+    
     # frontend tools
     brew install nvm
+    brew install jq
 
     # make gifs
     brew install --cask kap
@@ -224,8 +199,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     # Install developer friendly quick look plugins; see
     # https://github.com/sindresorhus/quick-look-plugins
     brew install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize suspicious-package apparency quicklookase qlvideo
-    brew install fonts/font-hack
-
     # best fontttty
     brew tap homebrew/cask-fonts
     brew install --cask font-hack-nerd-font
@@ -236,7 +209,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     brew cleanup
 
-    ponysay "It worked"
     # Restart shell
     exec -l $SHELL
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done2>/dev/null &
