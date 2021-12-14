@@ -94,6 +94,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     # cli tools
     brew install fzf
     brew install ripgrep
+    brew install the_silver_searcher
+
     # best fontttty
     brew tap homebrew/cask-fonts
     brew install --cask font-hack-nerd-font
