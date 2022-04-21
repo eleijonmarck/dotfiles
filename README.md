@@ -19,6 +19,13 @@ steps for osx (2022)
     zim - https://github.com/zimfw/zimfw
  3.
 
+
+--- 
+## vscode
+
+extensions to not live without
+- gitlens, https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+- gitblame, https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame
 ---
 
 Learn to love Vim, because it's worth the effort.
