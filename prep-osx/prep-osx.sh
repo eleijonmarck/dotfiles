@@ -88,7 +88,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     # terminal
     brew install tmux
     brew install jq
-    brew install ponysay
+
     # tldr
     brew install tldr
     # cli tools
@@ -96,11 +96,24 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install ripgrep
     brew install the_silver_searcher
 
+    # replacement for ls
+    brew install exa
+    # great fuzzy searching for folders
+    brew install zoxide
+
+    # checking bash scripts and giving hints
+    brew install shellcheck
+
+    # measure code complexity
+    brew install scc
+
     # best fontttty
     brew tap homebrew/cask-fonts
     brew install --cask font-hack-nerd-font
+    brew install --cask font-fira-code
 
-        # make gifs
+
+    # make gifs
     brew install --cask kap
 
     # so that itunes never plays songs
@@ -114,7 +127,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     brew install --cask --appdir="/Applications" iterm2
     brew install --cask --appdir="/Applications" 1password
     brew install --cask --appdir="/Applications" google-chrome
-    brew install --cask --appdir="/Applications" rectangle #panes for mac
+    brew install --cask --appdir="/Applications" keycast #panes for mac
     brew install --cask --appdir="/Applications" notion
 
     brew cleanup

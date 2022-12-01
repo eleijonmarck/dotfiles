@@ -17,15 +17,14 @@ steps for osx (2022)
  1. homebrew
  2. blazing fast zsh with sane defaults
     zim - https://github.com/zimfw/zimfw
- 3.
-
+ 3. fira coda - font
 
 --- 
 ## vscode
 
 extensions to not live without
 - gitlens, https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
-- gitblame, https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame
+- vscode-icons, https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons 
 ---
 
 Learn to love Vim, because it's worth the effort.
