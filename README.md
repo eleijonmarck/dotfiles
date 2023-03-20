@@ -18,14 +18,8 @@ steps for osx (2022)
  2. blazing fast zsh with sane defaults
     zim - https://github.com/zimfw/zimfw
  3. fira coda - font
-
---- 
-## vscode
-
-extensions to not live without
-- gitlens, https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
-- vscode-icons, https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons 
----
+ 4. terminal wezterminal
+   - https://github.com/wez/wezterm/issues/522#issuecomment-1462892799
 
 Learn to love Vim, because it's worth the effort.
 
