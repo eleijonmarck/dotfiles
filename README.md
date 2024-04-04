@@ -8,6 +8,9 @@ Welcome to the wonderful world of me and computer setup. This is a collection of
 + osx configuration
 + ubuntu configuration
 
+### tutorial of kickstart
++ kickstart-neovim - https://www.youtube.com/watch?v=m8C0Cq9Uv9o
+
 ## Capslock - ESC
  map the Capslock-key to Esc!!!
 
@@ -15,11 +18,8 @@ Welcome to the wonderful world of me and computer setup. This is a collection of
 
 steps for osx (2022)
  1. homebrew
- 2. blazing fast zsh with sane defaults
-    zim - https://github.com/zimfw/zimfw
- 3. fira coda - font
- 4. terminal wezterminal
-   - https://github.com/wez/wezterm/issues/522#issuecomment-1462892799
+ 2. starship - https://starship.rs/guide/#%F0%9F%9A%80-installation
+ 3. terminal warp
 
 Learn to love Vim, because it's worth the effort.
 
