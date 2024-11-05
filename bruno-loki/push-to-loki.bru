@@ -1,0 +1,19 @@
+meta {
+  name: push-to-loki
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://%3Cloki-server-url%3E/loki/api/v1/push
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  '{ "streams": [ { "stream": { "app": "test-app", "host": "localhost" }, "values": [ [ "'$(date
+}

@@ -20,6 +20,8 @@ steps for osx (2022)
  1. homebrew
  2. starship - https://starship.rs/guide/#%F0%9F%9A%80-installation
  3. terminal warp
+ 4. raycast
+ 5. karbiner (for mapping ctrl+j, ctrl+k to arrow down and up)
 
 Learn to love Vim, because it's worth the effort.
 
