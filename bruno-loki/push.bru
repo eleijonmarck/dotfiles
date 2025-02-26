@@ -1,0 +1,31 @@
+meta {
+  name: push
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3100/loki/api/v1/push
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "streams": [
+      {
+        "stream": {
+          "app": "test-app",
+          "host": "localhost"
+        },
+        "values": [
+          [ "TIMESTAMP_IN_NANOSECONDS", "This is a test log message" ]
+        ]
+      }
+    ]
+  }
+}

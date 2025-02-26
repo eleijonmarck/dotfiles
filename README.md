@@ -17,6 +17,7 @@ Welcome to the wonderful world of me and computer setup. This is a collection of
 ## Install OSX
 
 steps for osx (2022)
+ 1. arc
  1. homebrew
  2. starship - https://starship.rs/guide/#%F0%9F%9A%80-installation
  3. terminal warp

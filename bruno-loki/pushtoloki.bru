@@ -1,7 +1,7 @@
 meta {
-  name: push-to-loki
+  name: pushtoloki
   type: http
-  seq: 2
+  seq: 4
 }
 
 post {
@@ -15,5 +15,5 @@ headers {
 }
 
 body:json {
-  '{ "streams": [ { "stream": { "app": "test-app", "host": "localhost" }, "values": [ [ "'$(date
+  '{"streams": [{ "stream": {"foo": "bar"}, "values": [ [ "'$(date
 }
