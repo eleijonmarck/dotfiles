@@ -1,23 +1,14 @@
 #!/usr/bin/env bash
 
-# inspiration
-# https://github.com/donnemartin/dev-setup/blob/master/osx.sh
-
-# os-x for hackers
-# https://gist.github.com/brandonb927/3195465
-
 # Ask for the administrator password upfront
 sudo -v
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-# Sets the system language to english
-languagesetup -langspec English
-
 # Set a blazingly fast keyboard repeat rate
-defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
-defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+defaults write -g InitialKeyRepeat -int 10
+defaults write -g KeyRepeat -int 1
 
 echo "Setting trackpad & mouse speed to a reasonable number"
 defaults write -g com.apple.trackpad.scaling 2
@@ -27,98 +18,64 @@ defaults write -g com.apple.mouse.scaling 2.5
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# Finder: disable window animations and Get Info animations
+# Finder preferences
 defaults write com.apple.finder DisableAllAnimations -bool true
-
-# Finder: show hidden files by default
 defaults write com.apple.finder AppleShowAllFiles -bool true
-
-# Finder: show all filename extensions
 defaults write -g AppleShowAllExtensions -bool true
-
-# Finder: show status bar
 defaults write com.apple.finder ShowStatusBar -bool true
-
-# Finder: show path bar
 defaults write com.apple.finder ShowPathbar -bool true
-
-# Display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-
-# Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# top left corner, display to sleep
+# Dock settings
 defaults write com.apple.dock wvous-tl-corner -int 10
 defaults write com.apple.dock wvous-tl-modifier -int 0
-
-# Stop bouncing dock icon notifications
-defaults write com.apple.dock no-bouncing -bool TRUE
-
-echo "Dont animate opening applications from the Dock"
+defaults write com.apple.dock no-bouncing -bool true
 defaults write com.apple.dock launchanim -bool false
 
-echo "Enable tap to click (Trackpad)"
+# Enable tap to click (Trackpad)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
-# Install command-line tools using Homebrew.
-
-# Keep-alive: update existing `sudo` time stamp until the script has finished.
+# Keep-alive: update sudo timestamp
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-    # Check for Homebrew,
-    # Install if we don't have it
-    if test !$(which brew); then
-        echo "Installing homebrew..."
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
+# Install Homebrew if not installed
+if ! command -v brew &> /dev/null; then
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
-    # Make sure we’re using the latest Homebrew.
-    brew update
+# Update Homebrew
+brew update
 
-    # backend stuffz
-    brew install gvm # go version manager
-    brew install rust
-    
+# Install backend tools
+brew install goenv  # Alternative to gvm
+brew install rust
 
-    # ----- terminal ------
-    # neovim HEAD - 
-    brew install --HEAD luajit
-    brew install --HEAD neovim
+# Install terminal utilities
+brew install --HEAD luajit
+brew install neovim --HEAD
+brew install jq
+brew install tldr
+brew install fzf
+brew install ripgrep
+brew install the_silver_searcher
+brew install shellcheck
+brew install scc
 
-    brew install jq
+# Install fonts
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+brew install --cask font-fira-code
 
-    # tldr
-    brew install tldr
-    # cli tools
-    brew install fzf
-    brew install ripgrep
-    brew install the_silver_searcher
+# Install applications
+echo "Installing Applications..."
+brew install --cask slack
+brew install --cask visual-studio-code
+brew install --cask 1password
+brew install --cask notion
 
-        # checking bash scripts and giving hints
-    brew install shellcheck
+# Cleanup
+brew cleanup
 
-    # measure code complexity
-    brew install scc
-
-    # best fontttty
-    brew tap homebrew/cask-fonts
-    brew install --cask font-hack-nerd-font
-    brew install --cask font-fira-code
-
-    # so that itunes never plays songs
-    brew install --cask notunes
-
-    # Install Cask
-    echo "Installing Applications"
-
-    brew install --cask --appdir="/Applications" slack
-    brew install --cask --appdir="/Applications" visual-studio-code
-    brew install --cask --appdir="/Applications" 1password
-    brew install --cask --appdir="/Applications" notion
-
-    brew cleanup
-
-    # Restart shell
-    exec -l $SHELL
-    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done2>/dev/null &
+echo "✅ Setup complete! Restart your shell or computer for changes to take effect."
