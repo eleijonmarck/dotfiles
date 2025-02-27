@@ -10,13 +10,6 @@ APPS=(
     "Keynote"
     "Numbers"
     "Pages"
-    "Siri"
-    "Stocks"
-    "News"
-    "Home"
-    "Music"
-    "TV"
-    "Podcasts"
 )
 
 # Function to remove apps

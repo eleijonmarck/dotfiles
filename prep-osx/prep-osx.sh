@@ -64,7 +64,6 @@ brew install shellcheck
 brew install scc
 
 # Install fonts
-brew tap homebrew/cask-fonts
 brew install --cask font-hack-nerd-font
 brew install --cask font-fira-code
 
