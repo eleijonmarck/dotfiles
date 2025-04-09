@@ -34,6 +34,7 @@ defaults write com.apple.dock wvous-tl-corner -int 10
 defaults write com.apple.dock wvous-tl-modifier -int 0
 defaults write com.apple.dock no-bouncing -bool true
 defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock autohide -bool true
 
 # Enable tap to click (Trackpad)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
