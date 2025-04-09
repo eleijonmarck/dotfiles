@@ -8,8 +8,8 @@ Welcome to the wonderful world of me and computer setup. This is a collection of
 + osx configuration
 + ubuntu configuration
 
-### tutorial of kickstart
-+ kickstart-neovim - https://www.youtube.com/watch?v=m8C0Cq9Uv9o
+### neovim
++ astronvim for neovim, https://docs.astronvim.com/#-installation
 
 ## Capslock - ESC
  map the Capslock-key to Esc!!!
