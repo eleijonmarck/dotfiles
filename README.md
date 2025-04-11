@@ -22,6 +22,8 @@ steps for osx (2025)
  3. terminal warp
  4. raycast
  5. karbiner (for mapping ctrl+j, ctrl+k to arrow down and up)
+ 6. outerbase studio - database querying
+ 7. cursor
 
 Learn to love Vim, because it's worth the effort.
 

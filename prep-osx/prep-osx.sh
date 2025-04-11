@@ -65,6 +65,10 @@ brew install ripgrep
 brew install the_silver_searcher
 brew install shellcheck
 brew install scc
+# kubernetes
+brew install kubectl
+brew install k9s
+brew install coreutils
 
 # Install fonts
 brew install --cask font-hack-nerd-font
