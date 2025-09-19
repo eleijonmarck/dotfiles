@@ -10,6 +10,16 @@ Welcome to the wonderful world of me and computer setup. This is a collection of
 
 ### neovim
 + astronvim for neovim, https://docs.astronvim.com/#-installation
++ make sure that the community plugins are setup properly
+-- ~/.config/nvim/lua/community.lua
+
+```lua
+return {
+  "AstroNvim/astrocommunity",
+  { import = "astrocommunity.pack.lua" },
+  { import = "astrocommunity.pack.go" },
+}
+```
 
 ## Capslock - ESC
  map the Capslock-key to Esc!!!
@@ -19,12 +29,13 @@ Welcome to the wonderful world of me and computer setup. This is a collection of
 steps for osx (2025)
  1. arc
  1. homebrew
- 3. terminal warp
+ 3. terminal warp, iterm2
  4. raycast
  5. karbiner (for mapping ctrl+j, ctrl+k to arrow down and up)
  6. outerbase studio - database querying
  7. cursor
-
+ 8. atuin for terminal commands storage - https://github.com/atuinsh/atuin?tab=readme-ov-file#quickstart
+ 
 Learn to love Vim, because it's worth the effort.
 
 ![alt text](http://yannesposito.com/Scratch/img/blog/Learn-Vim-Progressively/uber_leet_use_vim.jpg "You are 1337!")

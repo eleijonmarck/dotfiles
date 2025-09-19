@@ -54,6 +54,8 @@ brew update
 # Install backend tools
 brew install goenv  # Alternative to gvm
 brew install rust
+# python
+brew install uv
 
 # Install terminal utilities
 brew install --HEAD luajit
@@ -65,6 +67,7 @@ brew install ripgrep
 brew install the_silver_searcher
 brew install shellcheck
 brew install scc
+
 # kubernetes
 brew install kubectl
 brew install k9s
@@ -80,6 +83,9 @@ brew install --cask slack
 brew install --cask visual-studio-code
 brew install --cask 1password
 brew install --cask notion
+
+# non essentials youtube
+brew install yt-dlp
 
 # Cleanup
 brew cleanup
