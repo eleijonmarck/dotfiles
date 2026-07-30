@@ -2,6 +2,8 @@
 	name = Eric Leijonmarck
 	email = eric.leijonmarck@gmail.com
 	signingkey = 80F3BFA6DB5B41959DC990F201AD0041D8D9CE4D
+[init]
+	defaultBranch = master
 [gpg]
 	program = /opt/homebrew/bin/gpg
 [core]
