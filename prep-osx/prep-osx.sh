@@ -36,6 +36,15 @@ defaults write com.apple.dock no-bouncing -bool true
 defaults write com.apple.dock launchanim -bool false
 defaults write com.apple.dock autohide -bool true
 
+# remove hot-corners
+# defaults write com.apple.dock wvous-tl-corner -int 0; \, i like the sleep function
+defaults write com.apple.dock wvous-tr-corner -int 0; \
+defaults write com.apple.dock wvous-bl-corner -int 0; \
+defaults write com.apple.dock wvous-br-corner -int 0; \
+
+# dock remove all pinned apps
+defaults write com.apple.dock persistent-apps -array
+
 # Enable tap to click (Trackpad)
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
