@@ -1,6 +1,5 @@
 ## GIT
 
-# Aliases
 # git aliases
 alias ga='git add'
 alias gpristine='git reset --hard && git clean -dfx'
@@ -42,17 +41,6 @@ alias ggs="gg --stat"
 alias gsl="git shortlog -sn"
 alias gwc="git whatchanged"
 
-
-
-[[ -s "/Users/eleijonmarck/.gvm/scripts/gvm" ]] && source "/Users/eleijonmarck/.gvm/scripts/gvm"
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/eleijonmarck/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/eleijonmarck/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/eleijonmarck/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/eleijonmarck/google-cloud-sdk/completion.zsh.inc'; fi
-
 # The next line enables shell command completion for kubectl.
 source <(kubectl completion zsh)
 
@@ -69,8 +57,6 @@ alias ls=eza
 # pressing Ctrl+X Ctrl+E will open the command in your configured editor
 bindkey "^X^E" vi-edit-command
 
-export DEPLOYMENT_TOOLS_PATH="/Users/eleijonmarck/dev/grafana/deployment_tools/"
-
 # go bin
 export PATH="$PATH:$HOME/go/bin"
 
@@ -80,9 +66,9 @@ export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agen
 # kubectl krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-. "$HOME/.atuin/bin/env"
 
 # atuin
+. "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
 
 
